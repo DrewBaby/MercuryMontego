@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
+
 namespace IGDB
 {
   public class IdentityOrValue<T> where T : class

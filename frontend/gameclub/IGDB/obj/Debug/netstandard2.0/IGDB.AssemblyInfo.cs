@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("IGDB")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cdcfdb9a8f4e3177fa922852fc2ed270976f2eba")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+24ceab29830412c7cce9ce09d7cdbe1d687c7c5b")]
 [assembly: System.Reflection.AssemblyProductAttribute("IGDB")]
 [assembly: System.Reflection.AssemblyTitleAttribute("IGDB")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

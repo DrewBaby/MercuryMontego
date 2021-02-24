@@ -10,7 +10,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameClubProject", "GameClub
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IGDB", "IGDB\IGDB.csproj", "{304BD276-EC20-4A6D-A470-D8066B9A7B73}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IGDB.Tests", "IGDB.Tests\IGDB.Tests.csproj", "{16287BA3-9504-498E-9DB5-28BC9660C7AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IGDB.xTest", "IGDB.xTest\IGDB.xTest.csproj", "{37EDE8E7-5186-4061-975D-F9254B3D1BCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,10 +26,10 @@ Global
 		{304BD276-EC20-4A6D-A470-D8066B9A7B73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{304BD276-EC20-4A6D-A470-D8066B9A7B73}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{304BD276-EC20-4A6D-A470-D8066B9A7B73}.Release|Any CPU.Build.0 = Release|Any CPU
-		{16287BA3-9504-498E-9DB5-28BC9660C7AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{16287BA3-9504-498E-9DB5-28BC9660C7AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{16287BA3-9504-498E-9DB5-28BC9660C7AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{16287BA3-9504-498E-9DB5-28BC9660C7AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37EDE8E7-5186-4061-975D-F9254B3D1BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37EDE8E7-5186-4061-975D-F9254B3D1BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37EDE8E7-5186-4061-975D-F9254B3D1BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37EDE8E7-5186-4061-975D-F9254B3D1BCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
