@@ -1144,20 +1144,25 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\IEUser\\.nuget\\packages\\": {}
+    "C:\\Users\\Travis\\.nuget\\packages\\": {},
+    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\IEUser\\source\\project\\MercuryMontego\\frontend\\gameclub\\IGDB\\IGDB.csproj",
+      "projectUniqueName": "C:\\Users\\Travis\\Documents\\Bellevue College\\2020-4 Winter\\ISIT 320 - Advanced Web Development\\Group Project\\Code\\MercuryMontego\\frontend\\gameclub\\IGDB\\IGDB.csproj",
       "projectName": "IGDB",
-      "projectPath": "C:\\Users\\IEUser\\source\\project\\MercuryMontego\\frontend\\gameclub\\IGDB\\IGDB.csproj",
-      "packagesPath": "C:\\Users\\IEUser\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\IEUser\\source\\project\\MercuryMontego\\frontend\\gameclub\\IGDB\\obj\\",
+      "projectPath": "C:\\Users\\Travis\\Documents\\Bellevue College\\2020-4 Winter\\ISIT 320 - Advanced Web Development\\Group Project\\Code\\MercuryMontego\\frontend\\gameclub\\IGDB\\IGDB.csproj",
+      "packagesPath": "C:\\Users\\Travis\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Travis\\Documents\\Bellevue College\\2020-4 Winter\\ISIT 320 - Advanced Web Development\\Group Project\\Code\\MercuryMontego\\frontend\\gameclub\\IGDB\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
-        "C:\\Users\\IEUser\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\Travis\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.0"
@@ -1168,7 +1173,6 @@
       },
       "frameworks": {
         "netstandard2.0": {
-          "targetAlias": "netstandard2.0",
           "projectReferences": {}
         }
       },
@@ -1180,7 +1184,6 @@
     },
     "frameworks": {
       "netstandard2.0": {
-        "targetAlias": "netstandard2.0",
         "dependencies": {
           "Microsoft.CSharp": {
             "target": "Package",
@@ -1212,7 +1215,7 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.103\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
       }
     }
   }
