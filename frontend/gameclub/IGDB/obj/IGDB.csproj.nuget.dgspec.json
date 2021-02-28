@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\IEUser\\source\\project\\MercuryMontego\\frontend\\GameClub\\IGDB\\IGDB.csproj": {}
+    "C:\\Users\\Andre\\source\\development\\project\\MercuryMontego\\frontend\\gameclub\\IGDB\\IGDB.csproj": {}
   },
   "projects": {
-    "C:\\Users\\IEUser\\source\\project\\MercuryMontego\\frontend\\GameClub\\IGDB\\IGDB.csproj": {
+    "C:\\Users\\Andre\\source\\development\\project\\MercuryMontego\\frontend\\gameclub\\IGDB\\IGDB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\IEUser\\source\\project\\MercuryMontego\\frontend\\GameClub\\IGDB\\IGDB.csproj",
+        "projectUniqueName": "C:\\Users\\Andre\\source\\development\\project\\MercuryMontego\\frontend\\gameclub\\IGDB\\IGDB.csproj",
         "projectName": "IGDB",
-        "projectPath": "C:\\Users\\IEUser\\source\\project\\MercuryMontego\\frontend\\GameClub\\IGDB\\IGDB.csproj",
-        "packagesPath": "C:\\Users\\IEUser\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\IEUser\\source\\project\\MercuryMontego\\frontend\\GameClub\\IGDB\\obj\\",
+        "projectPath": "C:\\Users\\Andre\\source\\development\\project\\MercuryMontego\\frontend\\gameclub\\IGDB\\IGDB.csproj",
+        "packagesPath": "C:\\Users\\Andre\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Andre\\source\\development\\project\\MercuryMontego\\frontend\\gameclub\\IGDB\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\IEUser\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Andre\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

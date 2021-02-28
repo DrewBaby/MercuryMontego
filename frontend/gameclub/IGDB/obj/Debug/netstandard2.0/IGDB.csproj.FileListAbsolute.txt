@@ -18,3 +18,13 @@ C:\Users\IEUser\source\project\MercuryMontego\frontend\gameclub\IGDB\obj\Debug\n
 C:\Users\IEUser\source\project\MercuryMontego\frontend\gameclub\IGDB\obj\Debug\netstandard2.0\IGDB.dll
 C:\Users\IEUser\source\project\MercuryMontego\frontend\gameclub\IGDB\obj\Debug\netstandard2.0\IGDB.pdb
 C:\Users\IEUser\source\project\MercuryMontego\frontend\GameClub\IGDB\obj\Debug\netstandard2.0\IGDB.csprojAssemblyReference.cache
+C:\Users\Andre\source\development\project\MercuryMontego\frontend\gameclub\IGDB\bin\Debug\netstandard2.0\IGDB.deps.json
+C:\Users\Andre\source\development\project\MercuryMontego\frontend\gameclub\IGDB\bin\Debug\netstandard2.0\IGDB.dll
+C:\Users\Andre\source\development\project\MercuryMontego\frontend\gameclub\IGDB\bin\Debug\netstandard2.0\IGDB.pdb
+C:\Users\Andre\source\development\project\MercuryMontego\frontend\gameclub\IGDB\obj\Debug\netstandard2.0\IGDB.csprojAssemblyReference.cache
+C:\Users\Andre\source\development\project\MercuryMontego\frontend\gameclub\IGDB\obj\Debug\netstandard2.0\IGDB.AssemblyInfoInputs.cache
+C:\Users\Andre\source\development\project\MercuryMontego\frontend\gameclub\IGDB\obj\Debug\netstandard2.0\IGDB.AssemblyInfo.cs
+C:\Users\Andre\source\development\project\MercuryMontego\frontend\gameclub\IGDB\obj\Debug\netstandard2.0\IGDB.csproj.CoreCompileInputs.cache
+C:\Users\Andre\source\development\project\MercuryMontego\frontend\gameclub\IGDB\obj\Debug\netstandard2.0\IGDB.sourcelink.json
+C:\Users\Andre\source\development\project\MercuryMontego\frontend\gameclub\IGDB\obj\Debug\netstandard2.0\IGDB.dll
+C:\Users\Andre\source\development\project\MercuryMontego\frontend\gameclub\IGDB\obj\Debug\netstandard2.0\IGDB.pdb

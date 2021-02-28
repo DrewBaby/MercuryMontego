@@ -19,14 +19,7 @@ namespace GameClubProject.Controllers
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            //var IGDB_CLIENT_ID = "suir6rwr94fhs2s3x8jcyfqfjpd6lj";
-            //var IGDB_CLIENT_SECRET = "a07fcbs0o7est8f2p9o6qpk09t5zfw";
 
-            ////_api = new IGDB.IGDBClient(
-            ////  Environment.GetEnvironmentVariable("IGDB_CLIENT_ID"),
-            ////  Environment.GetEnvironmentVariable("IGDB_CLIENT_SECRET")
-            ////);
-            //_api = new IGDB.IGDBClient(IGDB_CLIENT_ID, IGDB_CLIENT_SECRET);
 
         }
 
