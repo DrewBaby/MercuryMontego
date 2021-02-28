@@ -8,7 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GameClubProject.Data;
+using GameClubProject.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace GameClubProject
@@ -27,8 +27,8 @@ namespace GameClubProject
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext<VideoGameContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("VideoGameContext")));
+            services.AddDbContext <GameclubDBContext>(options =>
+               options.UseSqlServer(Configuration.GetConnectionString("GameclubDBContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
