@@ -28,7 +28,7 @@ namespace GameClubProject
             services.AddControllersWithViews();
 
             services.AddDbContext <GameclubDBContext>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("GameclubDBContext")));
+               options.UseSqlServer(Configuration.GetConnectionString("VideoGameContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

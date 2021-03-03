@@ -42,7 +42,7 @@ namespace GameClubProject.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
                 optionsBuilder.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=GameclubDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
@@ -54,14 +54,14 @@ namespace GameClubProject.Models
             modelBuilder.Entity<MembershipStatus>(entity =>
             {
                 entity.HasKey(e => e.PKey)
-                    .HasName("PK__membersh__4866A5D71F617E2C");
+                    .HasName("PK__membersh__4866A5D7258385FF");
 
                 entity.ToTable("membershipStatus");
 
-                entity.HasIndex(e => e.MembershipStatusId, "UQ__membersh__19137F518EB433AA")
+                entity.HasIndex(e => e.MembershipStatusId, "UQ__membersh__19137F51B5276FBC")
                     .IsUnique();
 
-                entity.HasIndex(e => e.Description, "UQ__membersh__489B0D97DEB72858")
+                entity.HasIndex(e => e.Description, "UQ__membersh__489B0D9753DD5E21")
                     .IsUnique();
 
                 entity.Property(e => e.PKey).HasColumnName("pKey");
@@ -77,7 +77,7 @@ namespace GameClubProject.Models
             modelBuilder.Entity<PersonalUserTrackedGame>(entity =>
             {
                 entity.HasKey(e => e.PKey)
-                    .HasName("PK__personal__4866A5D7CC5904B2");
+                    .HasName("PK__personal__4866A5D7078437FF");
 
                 entity.ToTable("personalUserTrackedGames");
 
@@ -111,17 +111,17 @@ namespace GameClubProject.Models
             modelBuilder.Entity<UserAccount>(entity =>
             {
                 entity.HasKey(e => e.PKey)
-                    .HasName("PK__userAcco__4866A5D71E6E7A19");
+                    .HasName("PK__userAcco__4866A5D7EA46BED5");
 
                 entity.ToTable("userAccount");
 
-                entity.HasIndex(e => e.UserName, "UQ__userAcco__66DCF95C52E4A6B4")
+                entity.HasIndex(e => e.UserName, "UQ__userAcco__66DCF95CD55BBC02")
                     .IsUnique();
 
-                entity.HasIndex(e => e.Email, "UQ__userAcco__AB6E6164176C5D39")
+                entity.HasIndex(e => e.Email, "UQ__userAcco__AB6E6164C75B5F3E")
                     .IsUnique();
 
-                entity.HasIndex(e => e.UserId, "UQ__userAcco__CB9A1CDE42DBF141")
+                entity.HasIndex(e => e.UserId, "UQ__userAcco__CB9A1CDE05D982F6")
                     .IsUnique();
 
                 entity.Property(e => e.PKey).HasColumnName("pKey");
@@ -188,7 +188,7 @@ namespace GameClubProject.Models
             modelBuilder.Entity<UserGamerTag>(entity =>
             {
                 entity.HasKey(e => e.PKey)
-                    .HasName("PK__userGame__4866A5D73C305ECF");
+                    .HasName("PK__userGame__4866A5D7A2E7BEBD");
 
                 entity.ToTable("userGamerTags");
 
@@ -215,7 +215,7 @@ namespace GameClubProject.Models
             modelBuilder.Entity<VideoGameAlternativeName>(entity =>
             {
                 entity.HasKey(e => e.PKey)
-                    .HasName("PK__videoGam__4866A5D7759DA5BE");
+                    .HasName("PK__videoGam__4866A5D788948344");
 
                 entity.ToTable("videoGameAlternativeNames");
 
@@ -249,7 +249,7 @@ namespace GameClubProject.Models
             modelBuilder.Entity<VideoGameArtwork>(entity =>
             {
                 entity.HasKey(e => e.PKey)
-                    .HasName("PK__videoGam__4866A5D79EDBF424");
+                    .HasName("PK__videoGam__4866A5D753B7E936");
 
                 entity.ToTable("videoGameArtwork");
 
@@ -288,11 +288,11 @@ namespace GameClubProject.Models
             modelBuilder.Entity<VideoGameCharacter>(entity =>
             {
                 entity.HasKey(e => e.GameId)
-                    .HasName("PK__videoGam__DA90B4B28EFBCC63");
+                    .HasName("PK__videoGam__DA90B4B22C1B9823");
 
                 entity.ToTable("videoGameCharacters");
 
-                entity.HasIndex(e => e.CharacterId, "UQ__videoGam__ADF9199E23F2A819")
+                entity.HasIndex(e => e.CharacterId, "UQ__videoGam__ADF9199EA481EA9B")
                     .IsUnique();
 
                 entity.Property(e => e.GameId)
@@ -338,12 +338,6 @@ namespace GameClubProject.Models
 
                 entity.Property(e => e.Width).HasColumnName("width");
 
-                entity.HasOne(d => d.Character)
-                    .WithOne(p => p.VideoGameCharacter)
-                    .HasForeignKey<VideoGameCharacter>(d => d.CharacterId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__videoGame__chara__5FB337D6");
-
                 entity.HasOne(d => d.Game)
                     .WithOne(p => p.VideoGameCharacter)
                     .HasPrincipalKey<VideoGameMain>(p => p.GameId)
@@ -355,7 +349,7 @@ namespace GameClubProject.Models
             modelBuilder.Entity<VideoGameCharacterAlias>(entity =>
             {
                 entity.HasKey(e => e.Pkey)
-                    .HasName("PK__videoGam__40A62DB9097EE811");
+                    .HasName("PK__videoGam__40A62DB99B16859E");
 
                 entity.ToTable("videoGameCharacterAlias");
 
@@ -373,13 +367,13 @@ namespace GameClubProject.Models
                     .WithMany(p => p.VideoGameCharacterAliases)
                     .HasPrincipalKey(p => p.CharacterId)
                     .HasForeignKey(d => d.CharacterId)
-                    .HasConstraintName("FK__videoGame__chara__59063A47");
+                    .HasConstraintName("FK__videoGame__chara__628FA481");
             });
 
             modelBuilder.Entity<VideoGameCharacterAppearsIn>(entity =>
             {
                 entity.HasKey(e => e.CharacterId)
-                    .HasName("PK__videoGam__ADF9199F2F816973");
+                    .HasName("PK__videoGam__ADF9199F468E58AA");
 
                 entity.ToTable("videoGameCharacterAppearsIn");
 
@@ -394,12 +388,19 @@ namespace GameClubProject.Models
                 entity.Property(e => e.PKey)
                     .ValueGeneratedOnAdd()
                     .HasColumnName("pKey");
+
+                entity.HasOne(d => d.Character)
+                    .WithOne(p => p.VideoGameCharacterAppearsIn)
+                    .HasPrincipalKey<VideoGameCharacter>(p => p.CharacterId)
+                    .HasForeignKey<VideoGameCharacterAppearsIn>(d => d.CharacterId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__videoGame__chara__6383C8BA");
             });
 
             modelBuilder.Entity<VideoGameGameMode>(entity =>
             {
                 entity.HasKey(e => e.PKey)
-                    .HasName("PK__videoGam__4866A5D7563D71F9");
+                    .HasName("PK__videoGam__4866A5D7A914C8B4");
 
                 entity.ToTable("videoGameGameModes");
 
@@ -441,7 +442,7 @@ namespace GameClubProject.Models
             modelBuilder.Entity<VideoGameGenre>(entity =>
             {
                 entity.HasKey(e => e.PKey)
-                    .HasName("PK__videoGam__4866A5D7518D1282");
+                    .HasName("PK__videoGam__4866A5D705CDFAE4");
 
                 entity.ToTable("videoGameGenres");
 
@@ -487,7 +488,7 @@ namespace GameClubProject.Models
             modelBuilder.Entity<VideoGameInvolvedCompany>(entity =>
             {
                 entity.HasKey(e => e.PKey)
-                    .HasName("PK__videoGam__4866A5D7935D589A");
+                    .HasName("PK__videoGam__4866A5D7924CFC58");
 
                 entity.ToTable("videoGameInvolvedCompanies");
 
@@ -533,7 +534,7 @@ namespace GameClubProject.Models
             modelBuilder.Entity<VideoGameKeyword>(entity =>
             {
                 entity.HasKey(e => e.PKey)
-                    .HasName("PK__videoGam__4866A5D77D66373A");
+                    .HasName("PK__videoGam__4866A5D77A2D6DA5");
 
                 entity.ToTable("videoGameKeywords");
 
@@ -559,11 +560,11 @@ namespace GameClubProject.Models
             modelBuilder.Entity<VideoGameMain>(entity =>
             {
                 entity.HasKey(e => e.PKey)
-                    .HasName("PK__videoGam__4866A5D7BBC5D582");
+                    .HasName("PK__videoGam__4866A5D791060557");
 
                 entity.ToTable("videoGameMain");
 
-                entity.HasIndex(e => e.GameId, "UQ__videoGam__DA90B4B33CA65266")
+                entity.HasIndex(e => e.GameId, "UQ__videoGam__DA90B4B340B464EA")
                     .IsUnique();
 
                 entity.Property(e => e.PKey).HasColumnName("pKey");
@@ -634,7 +635,7 @@ namespace GameClubProject.Models
             modelBuilder.Entity<VideoGameMultiplayerMode>(entity =>
             {
                 entity.HasKey(e => e.PKey)
-                    .HasName("PK__videoGam__4866A5D7D34C1532");
+                    .HasName("PK__videoGam__4866A5D7AB0C4313");
 
                 entity.ToTable("videoGameMultiplayerMode");
 
@@ -676,7 +677,7 @@ namespace GameClubProject.Models
             modelBuilder.Entity<VideoGamePlatform>(entity =>
             {
                 entity.HasKey(e => e.PKey)
-                    .HasName("PK__videoGam__4866A5D75AB07790");
+                    .HasName("PK__videoGam__4866A5D7D0655899");
 
                 entity.ToTable("videoGamePlatforms");
 
@@ -702,7 +703,7 @@ namespace GameClubProject.Models
             modelBuilder.Entity<VideoGameScreenshot>(entity =>
             {
                 entity.HasKey(e => e.PKey)
-                    .HasName("PK__videoGam__4866A5D7A8340C67");
+                    .HasName("PK__videoGam__4866A5D75D497DE8");
 
                 entity.ToTable("videoGameScreenshot");
 
@@ -740,7 +741,7 @@ namespace GameClubProject.Models
             modelBuilder.Entity<VideoGameSimilarTitle>(entity =>
             {
                 entity.HasKey(e => e.PKey)
-                    .HasName("PK__videoGam__4866A5D76FEC0440");
+                    .HasName("PK__videoGam__4866A5D723D5AAE9");
 
                 entity.ToTable("videoGameSimilarTitles");
 
@@ -758,13 +759,13 @@ namespace GameClubProject.Models
                     .WithMany(p => p.VideoGameSimilarTitles)
                     .HasPrincipalKey(p => p.GameId)
                     .HasForeignKey(d => d.HostGameId)
-                    .HasConstraintName("FK__videoGame__hostG__60A75C0F");
+                    .HasConstraintName("FK__videoGame__hostG__5FB337D6");
             });
 
             modelBuilder.Entity<VideoGameTheme>(entity =>
             {
                 entity.HasKey(e => e.PKey)
-                    .HasName("PK__videoGam__4866A5D7EF066F55");
+                    .HasName("PK__videoGam__4866A5D7A07CD8FC");
 
                 entity.ToTable("videoGameThemes");
 
@@ -806,7 +807,7 @@ namespace GameClubProject.Models
             modelBuilder.Entity<VideoGameUserContent>(entity =>
             {
                 entity.HasKey(e => e.PKey)
-                    .HasName("PK__videoGam__4866A5D7A9BB3377");
+                    .HasName("PK__videoGam__4866A5D78D4A9CC3");
 
                 entity.ToTable("videoGameUserContent");
 

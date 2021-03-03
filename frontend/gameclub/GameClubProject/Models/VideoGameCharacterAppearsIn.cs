@@ -11,6 +11,6 @@ namespace GameClubProject.Models
         public string CharacterId { get; set; }
         public string GameId { get; set; }
 
-        public virtual VideoGameCharacter VideoGameCharacter { get; set; }
+        public virtual VideoGameCharacter Character { get; set; }
     }
 }

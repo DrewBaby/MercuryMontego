@@ -27,8 +27,8 @@ namespace GameClubProject.Models
         public int? Height { get; set; }
         public int? Width { get; set; }
 
-        public virtual VideoGameCharacterAppearsIn Character { get; set; }
         public virtual VideoGameMain Game { get; set; }
+        public virtual VideoGameCharacterAppearsIn VideoGameCharacterAppearsIn { get; set; }
         public virtual ICollection<VideoGameCharacterAlias> VideoGameCharacterAliases { get; set; }
     }
 }
