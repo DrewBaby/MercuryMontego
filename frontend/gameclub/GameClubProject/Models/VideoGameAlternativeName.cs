@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace GameClubProject
+namespace GameClubProject.Models
 {
-    public partial class AlternativeGameName
+    public partial class VideoGameAlternativeName
     {
         public int PKey { get; set; }
         public string GameId { get; set; }
