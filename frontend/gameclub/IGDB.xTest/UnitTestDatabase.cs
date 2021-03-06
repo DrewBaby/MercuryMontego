@@ -25,11 +25,11 @@ namespace IGDB.xTest
         }
     }
 
-    public class IntegrationTest
+    public class DatabaseIntegrationTest
     {
         GameclubDBContext _context;
 
-        public IntegrationTest()
+        public DatabaseIntegrationTest()
         {
             var serviceProvider = new ServiceCollection()
                 .AddEntityFrameworkSqlServer()
