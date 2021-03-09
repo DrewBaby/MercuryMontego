@@ -41,11 +41,18 @@ namespace GameClubProject.Controllers
             return View();
         }
 
+        // --- List of views go here ---
+        //
+        // Note: Method names should match the view they're calling
         public IActionResult Privacy()
         {
             return View();
         }
 
+        public IActionResult About()
+        {
+            return View();
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

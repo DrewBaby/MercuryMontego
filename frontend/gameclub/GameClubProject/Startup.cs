@@ -58,7 +58,9 @@ namespace GameClubProject
                     //pattern: "{controller=Home}/{action=Index}/{id?}");
                     name: "default",
                     pattern: "{controller=GameQuery}/{action=igdbquery}");
-
+                //endpoints.MapControllerRoute(
+                //    name: "about",
+                //    pattern: "{controller=Home}/{action=Index}");
 
             });
         }

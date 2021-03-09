@@ -1,7 +1,43 @@
-﻿@{
+﻿@*@model GameClubProject.Controllers.IndexViewModel*@
+@model IEnumerable<IGDB.Models.Cover> 
+@{
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
+<h2>New Home Page</h2>
 
 <p>Hello from our View Template!</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th>@Html.DisplayNameFor(model => model.Game)</th>
+            <th>@Html.DisplayNameFor(model => model.Url)</th>
+            <th>@Html.DisplayNameFor(model => model.Height)</th>
+            <th>@Html.DisplayNameFor(model => model.Width)</th>
+            <th>@Html.DisplayNameFor(model => model.AlphaChannel)</th>
+            <th>@Html.DisplayNameFor(model => model.Animated)</th>
+            <th>@Html.DisplayNameFor(model => model.Checksum)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+            <td>@Html.DisplayFor(modelItem => item.Game)</td>
+            <td>@Html.DisplayFor(modelItem => item.Url)</td>
+            <td>@Html.DisplayFor(modelItem => item.Height)</td>
+            <td>@Html.DisplayFor(modelItem => item.Width)</td>
+            <td>@Html.DisplayFor(modelItem => item.AlphaChannel)</td>
+            <td>@Html.DisplayFor(modelItem => item.Animated)</td>
+            <td>@Html.DisplayFor(modelItem => item.Checksum)</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
