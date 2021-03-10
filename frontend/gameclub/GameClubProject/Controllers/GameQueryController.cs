@@ -76,6 +76,7 @@ namespace GameClubProject.Controllers
                 Game[] gamesByGenre = await _api.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: "fields id, name, cover, rating; where cover != null & rating != null & genres = (" + genreId[x] + "); sort rating desc; limit 10;");
                 coverImageIDSet = GenerateCoverImageIDSet(gamesByGenre);
                 Cover[] gameCoverByGenre = await _api.QueryAsync<Cover>(IGDBClient.Endpoints.Covers, query: "fields alpha_channel, animated, checksum, game, height, image_id, url, width; where id = (" + coverImageIDSet + ");");
+                gameCoverByGenre = ReorderCoverImageArrayByGameArray(gamesByGenre, gameCoverByGenre);
                 if (x == 0)
                 {
                     model.GameCollectionB = gamesByGenre;
@@ -93,6 +94,7 @@ namespace GameClubProject.Controllers
             model.GameCollectionA = topTenGames;
             coverImageIDSet = GenerateCoverImageIDSet(topTenGames);
             Cover[] covers = await _api.QueryAsync<Cover>(IGDBClient.Endpoints.Covers, query: "fields alpha_channel, animated, checksum, game, height, image_id, url, width; where id = ("+ coverImageIDSet +");");
+            covers = ReorderCoverImageArrayByGameArray(topTenGames, covers);
             model.CoverCollectionA = covers;
 
             // Example games: 10 games with the highest ratings
@@ -144,6 +146,28 @@ namespace GameClubProject.Controllers
                 }
             }
             return coverImageIDSet;
+        }
+
+        // Reorders an array of Cover so that a game at position game[x] will accurately associate it's cover
+        // image details in cover[x]. Enables it so when calling GameCollectionA[1], you can find the
+        // associated cover image details in CoverCollectionA[1] when displaying data on pages.
+        private Cover[] ReorderCoverImageArrayByGameArray(Game[] arrayToMatch, Cover[] arrayReorder)
+        {
+            Cover[] arrayOrdered = new Cover[arrayReorder.Length];
+            long?[] searchArray = new long?[arrayReorder.Length];
+            for (int x = 0; x < searchArray.Length; x++)
+            {
+                searchArray[x] = arrayReorder[x].Game.Id;
+            }
+            for (int x = 0; x < arrayToMatch.Length; x++)
+            {
+                long? indexToFind = arrayToMatch[x].Id;
+                long? index;
+                index = Array.IndexOf(searchArray, indexToFind);
+                int indexInt = Convert.ToInt32(index);
+                arrayOrdered[x] = arrayReorder[indexInt];
+            }
+            return arrayOrdered;
         }
     }
 
