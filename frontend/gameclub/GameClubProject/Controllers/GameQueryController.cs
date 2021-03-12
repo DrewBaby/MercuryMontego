@@ -50,8 +50,10 @@ namespace GameClubProject.Controllers
 
         public async Task<IActionResult> IndexAsync()
         {
+            const int REEL_LENGTH = 15;
+
             _api = new IGDB.IGDBClient(IGDB_CLIENT_ID, IGDB_CLIENT_SECRET);
-            IndexViewModel model = new IndexViewModel();
+            IndexReel model = new IndexReel();
             string coverImageIDSet;
             Random random = new Random();
             long?[] genreId = new long?[2];
@@ -73,29 +75,26 @@ namespace GameClubProject.Controllers
             // for that genre and the associated cover image details
             for (int x = 0; x < 2; x++)
             {
-                Game[] gamesByGenre = await _api.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: "fields id, name, cover, rating; where cover != null & rating != null & genres = (" + genreId[x] + "); sort rating desc; limit 10;");
+                Game[] gamesByGenre = await _api.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: "fields id, name, cover, rating; where cover != null & rating != null & genres = (" + genreId[x] + "); sort rating desc; limit "+ REEL_LENGTH +";");
                 coverImageIDSet = GenerateCoverImageIDSet(gamesByGenre);
-                Cover[] gameCoverByGenre = await _api.QueryAsync<Cover>(IGDBClient.Endpoints.Covers, query: "fields alpha_channel, animated, checksum, game, height, image_id, url, width; where id = (" + coverImageIDSet + ");");
+                Cover[] gameCoverByGenre = await _api.QueryAsync<Cover>(IGDBClient.Endpoints.Covers, query: "fields alpha_channel, animated, checksum, game, height, image_id, url, width; where id = (" + coverImageIDSet + "); limit " + REEL_LENGTH + ";");
                 gameCoverByGenre = ReorderCoverImageArrayByGameArray(gamesByGenre, gameCoverByGenre);
                 if (x == 0)
                 {
-                    model.GameCollectionB = gamesByGenre;
-                    model.CoverCollectionB = gameCoverByGenre;
+                    model.GenreAGames = MergeDataSets(gamesByGenre, gameCoverByGenre);
                 }
                 if (x == 1)
                 {
-                    model.GameCollectionC = gamesByGenre;
-                    model.CoverCollectionC = gameCoverByGenre;
+                    model.GenreBGames = MergeDataSets(gamesByGenre, gameCoverByGenre);
                 }
             }
 
             // Get 10 games with highest ratings and their cover pictures
-            Game[] topTenGames = await _api.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: "fields id, name, cover, genres, rating; where cover != null & rating != null; sort rating desc; limit 10;");
-            model.GameCollectionA = topTenGames;
-            coverImageIDSet = GenerateCoverImageIDSet(topTenGames);
-            Cover[] covers = await _api.QueryAsync<Cover>(IGDBClient.Endpoints.Covers, query: "fields alpha_channel, animated, checksum, game, height, image_id, url, width; where id = ("+ coverImageIDSet +");");
-            covers = ReorderCoverImageArrayByGameArray(topTenGames, covers);
-            model.CoverCollectionA = covers;
+            Game[] topGames = await _api.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: "fields id, name, cover, genres, rating; where cover != null & rating != null; sort rating desc; limit "+ REEL_LENGTH +";");
+            coverImageIDSet = GenerateCoverImageIDSet(topGames);
+            Cover[] covers = await _api.QueryAsync<Cover>(IGDBClient.Endpoints.Covers, query: "fields alpha_channel, animated, checksum, game, height, image_id, url, width; where id = ("+ coverImageIDSet + "); limit " + REEL_LENGTH + ";");
+            covers = ReorderCoverImageArrayByGameArray(topGames, covers);
+            model.TopRatedGames = MergeDataSets(topGames, covers);
 
             // Example games: 10 games with the highest ratings
             // Example covers: covers associated with the 10 games above
@@ -111,10 +110,10 @@ namespace GameClubProject.Controllers
             // checksum = 144656d4-5cfd-86a4-d785-89f7fcb8bb96
 
             // Returns model which consists of 3 sets of games and their associated cover images
-            // CollectionA = top 10 games by rating
-            // CollectionB & C = top 10 games by genre (genres chosen at random on page load)
-            //return View(model)
-            return View(covers);
+            // TopGames = top rated games
+            // GenreAGames & GenreBGames = top rated games by genre (genres chosen at random on page load)
+            return View(model);
+            //return View(covers);
         }
         public IActionResult About()
         {
@@ -148,9 +147,8 @@ namespace GameClubProject.Controllers
             return coverImageIDSet;
         }
 
-        // Reorders an array of Cover so that a game at position game[x] will accurately associate it's cover
-        // image details in cover[x]. Enables it so when calling GameCollectionA[1], you can find the
-        // associated cover image details in CoverCollectionA[1] when displaying data on pages.
+        // Reorders an array of Cover so that a game in Game[] will accurately 
+        // associate it's cover image details in Cover[]. 
         private Cover[] ReorderCoverImageArrayByGameArray(Game[] arrayToMatch, Cover[] arrayReorder)
         {
             Cover[] arrayOrdered = new Cover[arrayReorder.Length];
@@ -169,16 +167,39 @@ namespace GameClubProject.Controllers
             }
             return arrayOrdered;
         }
+
+        // Nice generates an array of ReelItems that consist of a video game and it's associated
+        // cover image details
+        private ReelItem[] MergeDataSets(Game[] game, Cover[] cover)
+        {
+            ReelItem[] gameReel = new ReelItem[game.Length];
+            for (int y = 0; y < game.Length; y++)
+            {
+                ReelItem item = new ReelItem(game[y], cover[y]);
+                gameReel[y] = item;
+            }
+            return gameReel;
+        }
     }
 
-    // Helper class to build and send more complex data objects to views
-    public class IndexViewModel
+    // Helper classes to build and send more complex data objects to views
+    public class IndexReel
     {
-        public IEnumerable<Game> GameCollectionA { get; set; }
-        public IEnumerable<Cover> CoverCollectionA { get; set; }
-        public IEnumerable<Game> GameCollectionB { get; set; }
-        public IEnumerable<Cover> CoverCollectionB { get; set; }
-        public IEnumerable<Game> GameCollectionC { get; set; }
-        public IEnumerable<Cover> CoverCollectionC { get; set; }
+        public IEnumerable<ReelItem> TopRatedGames { get; set; }
+        public IEnumerable<ReelItem> GenreAGames { get; set; }
+        public IEnumerable<ReelItem> GenreBGames { get; set; }
+
+    }
+
+    public class ReelItem
+    {
+        public Game Game { get; set; }
+        public Cover Cover { get; set; }
+
+        public ReelItem(Game game, Cover cover)
+        {
+            Game = game;
+            Cover = cover;
+        }
     }
 }
