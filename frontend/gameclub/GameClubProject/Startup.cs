@@ -27,8 +27,21 @@ namespace GameClubProject
         {
             services.AddControllersWithViews();
 
-            services.AddDbContext <GameclubDBContext>(options =>
-               options.UseSqlServer(Configuration.GetConnectionString("GameclubDBContext")));
+            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+                services.AddDbContext<GameclubDBContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("GameclubDBContextProd"))
+                );
+            else 
+                services.AddDbContext <GameclubDBContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("GameclubDBContext"))
+                );
+
+            //Automatically Perform Database Migration
+            services.BuildServiceProvider().GetService<GameclubDBContext>().Database.Migrate();
+
+            services.AddMvc();
+            services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,7 +50,7 @@ namespace GameClubProject
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-            }
+            }   
             else
             {
                 app.UseExceptionHandler("/Home/Error");
@@ -50,14 +63,16 @@ namespace GameClubProject
             app.UseRouting();
 
             app.UseAuthorization();
-
+            
+            app.UseSession();
+            //app.UseMvc();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    //name: "default",
-                    //pattern: "{controller=Home}/{action=Index}/{id?}");
                     name: "default",
-                    pattern: "{controller=GameQuery}/{action=igdbquery}");
+                    //pattern: "{controller=Home}/{action=Index}/{id?}");
+                //name: "default",
+                pattern: "{controller=GameQuery}/{action=igdbquery}");
 
 
             });

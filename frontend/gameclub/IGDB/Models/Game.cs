@@ -1,5 +1,6 @@
 using System;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace IGDB.Models
 {
@@ -72,6 +73,7 @@ namespace IGDB.Models
     public IdentitiesOrValues<ReleaseDate> ReleaseDates { get; set; }
 
     public IdentitiesOrValues<Screenshot> Screenshots { get; set; }
+    //public  List<Screenshot> screenshots{get;set;}
 
     public IdentitiesOrValues<Game> SimilarGames { get; set; }
 
