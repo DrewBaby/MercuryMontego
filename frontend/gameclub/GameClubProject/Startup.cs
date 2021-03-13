@@ -37,7 +37,7 @@ namespace GameClubProject
                 );
 
             //Automatically Perform Database Migration
-            services.BuildServiceProvider().GetService<GameclubDBContext>().Database.Migrate();
+            //services.BuildServiceProvider().GetService<GameclubDBContext>().Database.Migrate();
 
             services.AddMvc();
             services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
@@ -72,7 +72,7 @@ namespace GameClubProject
                     name: "default",
                     //pattern: "{controller=Home}/{action=Index}/{id?}");
                 //name: "default",
-                pattern: "{controller=GameQuery}/{action=igdbquery}");
+                pattern: "{controller=GameQuery}/{action=Home}");
 
 
             });

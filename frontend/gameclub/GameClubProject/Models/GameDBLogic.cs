@@ -11,7 +11,6 @@ namespace GameClubProject.Models
 {
     public class GameDBLogic
     {
-
         static protected string IGDB_CLIENT_ID = "suir6rwr94fhs2s3x8jcyfqfjpd6lj";
         static protected string IGDB_CLIENT_SECRET = "a07fcbs0o7est8f2p9o6qpk09t5zfw";
 
@@ -41,9 +40,9 @@ namespace GameClubProject.Models
         {
             var _api = new IGDB.IGDBClient(IGDB_CLIENT_ID, IGDB_CLIENT_SECRET);
             var query = (@"
-            fields screenshots.url,cover.url,cover.image_id,name,rating,first_release_date,platforms.name,popularity;
+            fields screenshots.url,cover.url,cover.image_id,name,rating,first_release_date,platforms.name;
             where first_release_date > 1527206400 & first_release_date < 1546254191;
-            where popularity>100 & rating>1;sort rating desc; 
+            where rating>1;sort rating desc; 
             limit 6;");
 
             try
@@ -81,7 +80,7 @@ namespace GameClubProject.Models
             var _api = new IGDB.IGDBClient(IGDB_CLIENT_ID, IGDB_CLIENT_SECRET);
             var query = $@"
                 fields genres.name,genres.slug,cover.url,cover.image_id,name,rating,first_release_date,platforms.name;
-                where popularity>1&rating>1;
+                where rating>1;
                 search ""{name}"";
                 limit 20;";
             try
@@ -90,8 +89,8 @@ namespace GameClubProject.Models
                 System.DateTime dateTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
                 foreach (var game in games)
                 {
-                    dateTime = dateTime.AddSeconds(Convert.ToSingle(game.FirstReleaseDate));
-                    game.FirstReleaseDate = dateTime;
+                    dateTime = dateTime.AddSeconds(game.Freshfirst_release_date);
+                    game.release_date = dateTime;
                 }
                 return games;
             }
@@ -106,7 +105,7 @@ namespace GameClubProject.Models
             var query = $@"
                 fields genres.name,cover.image_id,name,
                 rating,first_release_date,platforms.name,
-                storyline,summary,popularity,screenshots.image_id,videos.video_id,videos.name,
+                storyline,summary,screenshots.image_id,videos.video_id,videos.name,
                 expansions.name,expansions.cover.image_id,involved_companies.company.name;
                 where id={gameId};";
 
@@ -116,8 +115,8 @@ namespace GameClubProject.Models
                 System.DateTime dateTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
                 foreach (var game in games)
                 {
-                    dateTime = dateTime.AddSeconds(Convert.ToSingle(game.FirstReleaseDate));
-                    game.FirstReleaseDate = dateTime;
+                    dateTime = dateTime.AddSeconds(game.Freshfirst_release_date);
+                    game.release_date = dateTime;
 
                     if (game.Cover != null)
                     {
@@ -165,7 +164,7 @@ namespace GameClubProject.Models
             {
                 query = $@"
                 fields genres.name,genres.slug,cover.url,cover.image_id,name,rating,first_release_date,platforms.name;
-                where popularity>1&rating>{MinRating}&rating<{MaxRating};
+                where rating>{MinRating}&rating<{MaxRating};
                 sort rating desc;
                 limit 20;";
             }
@@ -173,7 +172,7 @@ namespace GameClubProject.Models
             {
                 query = $@"
                     fields genres.name,genres.slug,cover.url,cover.image_id,name,rating,first_release_date,platforms.name;
-                    where popularity>1&rating>{MinRating}&rating<{MaxRating};
+                    where rating>{MinRating}&rating<{MaxRating};
                     where platforms.name~*""{platform}""*;
                     sort rating desc;
                     limit 20;";
@@ -182,7 +181,7 @@ namespace GameClubProject.Models
             {
                 query = $@"
                     fields genres.name,genres.slug,cover.url,cover.image_id,name,rating,first_release_date,platforms.name;
-                    where popularity>1&rating>{MinRating}&rating<{MaxRating};
+                    where rating>{MinRating}&rating<{MaxRating};
                     where genres.slug~*""{genre}""*;
                     where genres.slug~*""{genre}""*;
                     sort rating desc;
@@ -192,7 +191,7 @@ namespace GameClubProject.Models
             {
                 query = $@"
                     fields genres.name,genres.slug,cover.url,cover.image_id,name,rating,first_release_date,platforms.name;
-                    where popularity>1&rating>{MinRating}&rating<{MaxRating};
+                    where rating>{MinRating}&rating<{MaxRating};
                     where genres.slug~*""{genre}"";
                     where genres.slug~*""{genre}""*;
                     where platforms.name~*""{platform}""*;

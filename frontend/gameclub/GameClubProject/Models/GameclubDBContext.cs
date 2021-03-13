@@ -48,7 +48,8 @@ namespace GameClubProject
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
-            modelBuilder.Entity<AlternativeGameName>(entity =>
+            
+                modelBuilder.Entity<AlternativeGameName>(entity =>
             {
                 entity.HasKey(e => e.PKey)
                     .HasName("PK__alternat__4866A5D78439C31F");
@@ -690,3 +691,4 @@ namespace GameClubProject
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
     }
 }
+

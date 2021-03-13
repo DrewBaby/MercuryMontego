@@ -2,6 +2,7 @@ using System;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 
+
 namespace IGDB.Models
 {
   public class Game : ITimestamps, IIdentifier, IHasChecksum
@@ -102,8 +103,10 @@ namespace IGDB.Models
     public IdentityOrValue<Game> VersionParent { get; set; }
 
     public string VersionTitle { get; set; }
+        public double Freshfirst_release_date { get; set; }
+        public DateTime release_date { get; set; }
 
-    public IdentitiesOrValues<GameVideo> Videos { get; set; }
+        public IdentitiesOrValues<GameVideo> Videos { get; set; }
 
     public IdentitiesOrValues<Website> Websites { get; set; }
   }
