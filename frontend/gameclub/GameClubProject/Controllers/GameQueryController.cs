@@ -124,30 +124,8 @@ namespace GameClubProject.Controllers
         public async Task<IActionResult> ShowGame(int gameId)
         {
             var gamePageDetail = new GamePageDetail();
-            //gameProfileBundle.user = dbContext.Users.FirstOrDefault(user => user.user_id == user_id);
-            //if (dbContext.Games.FirstOrDefault(game => game.gameId == gameId) == null)
-            //{
             gamePageDetail.game = await GameDBLogic.ShowOneGame(gameId);
-            //SaveGame(game);
-            //}
-            /*
-            gameProfileBundle.game = dbContext.Games.Include(g => g.cover)
-                                                .Include(g => g.game_Genres).ThenInclude(g => g.genre)
-                                                .Include(g => g.game_Companies).ThenInclude(invc => invc.company)
-                                                .Include(g => g.game_Platforms).ThenInclude(p => p.platform)
-                                                .Include(g => g.screenshots)
-                                                .Include(g => g.videos)
-                                                .Include(g => g.expansions).ThenInclude(e => e.cover)
-                                                .Include(g => g.Reviews).ThenInclude(r => r.reviewer)
-                                                .Include(g => g.Reviews).ThenInclude(r => r.likeCounts)
-                                                .Include(g => g.Reviews).ThenInclude(r => r.responses)
-                                                .FirstOrDefault(g => g.gameId == gameId);
-
-            
-            gameProfileBundle.formReview = new Review();
-            gameProfileBundle.Comment = new ReviewResponse();
-            ViewBag.userName = HttpContext.Session.GetString("userName");
-            */
+         
             return View("GameDetail", gamePageDetail);
 
         }
