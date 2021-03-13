@@ -61,6 +61,9 @@ namespace GameClubProject
                 endpoints.MapControllerRoute(
                     name: "about",
                     pattern: "{controller=GameQuery}/{action=About}");
+                endpoints.MapControllerRoute(
+                    name: "details",
+                    pattern: "{controller=GameQuery}/{action=Details}/{id?}");
 
             });
         }

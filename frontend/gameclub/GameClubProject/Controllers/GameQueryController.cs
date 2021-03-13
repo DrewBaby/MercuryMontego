@@ -81,10 +81,12 @@ namespace GameClubProject.Controllers
                 gameCoverByGenre = ReorderCoverImageArrayByGameArray(gamesByGenre, gameCoverByGenre);
                 if (x == 0)
                 {
+                    model.GenreATitle = listOfGenres[Array.IndexOf(genreList.ToArray(), genreId[x])].Name;
                     model.GenreAGames = MergeDataSets(gamesByGenre, gameCoverByGenre);
                 }
                 if (x == 1)
                 {
+                    model.GenreBTitle = listOfGenres[Array.IndexOf(genreList.ToArray(), genreId[x])].Name;
                     model.GenreBGames = MergeDataSets(gamesByGenre, gameCoverByGenre);
                 }
             }
@@ -115,6 +117,17 @@ namespace GameClubProject.Controllers
             return View(model);
             //return View(covers);
         }
+
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null) return NotFound();
+
+            _api = new IGDB.IGDBClient(IGDB_CLIENT_ID, IGDB_CLIENT_SECRET);
+            Game[] game = await _api.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: "fields *; where id ="+ id +"; limit 1;");
+            Game gameDetail = game[0];
+            return View(gameDetail);
+        }
+
         public IActionResult About()
         {
             return View();
@@ -186,6 +199,8 @@ namespace GameClubProject.Controllers
     public class IndexReel
     {
         public IEnumerable<ReelItem> TopRatedGames { get; set; }
+        public string GenreATitle { get; set; }
+        public string GenreBTitle { get; set; }
         public IEnumerable<ReelItem> GenreAGames { get; set; }
         public IEnumerable<ReelItem> GenreBGames { get; set; }
 

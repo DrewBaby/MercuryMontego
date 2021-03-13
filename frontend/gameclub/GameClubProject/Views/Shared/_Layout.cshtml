@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="~/css/site.css" />
+    @RenderSection("Styles", required: false)
 </head>
 <body>
     <header>
@@ -18,14 +19,14 @@
             </ul>
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="" data-target="#sidebar" data-toggle="collapse" class="d-block d-md-none text-dark"><i class="bi bi-layout-sidebar-inset"></i> Toggle Menu</a>
+                    <a href="" data-target="#sidebar" data-toggle="collapse" class="d-block d-md-none text-dark text-decoration-none"><i class="bi bi-layout-sidebar-inset"></i> Toggle Menu</a>
                 </li>
             </ul>
         </div>
     </header>
 
     <div class="container-fluid">
-        <div class="row">
+        <div class="row flex-nowrap">
             <div class="col-1 collapse show d-md-flex bg-light pt-2 pl-0 box-shadow border-right min-vh-100" id="sidebar" style="max-width:250px;">
                 <ul class="nav flex-column flex-nowrap overflow-hidden">
                     <li class="nav-item">
@@ -44,19 +45,18 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-truncate text-dark" asp-area="" asp-controller="GameQuery" asp-action="About"><i class="bi bi-info-circle"></i> About Us</a>
+                        <a class="nav-link text-truncate text-dark" asp-area="" asp-controller="GameQuery" asp-action="About"><i class="bi bi-info-circle-fill"></i> About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-truncate text-dark" asp-area="" asp-controller="Home" asp-action="Privacy"><i class="bi bi-info-circle"></i> Privacy</a>
+                        <a class="nav-link text-truncate text-dark" asp-area="" asp-controller="Home" asp-action="Privacy"><i class="bi bi-shield-lock-fill"></i> Privacy</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-truncate text-dark" asp-area="" asp-controller="GameQuery" asp-action="Index">NewHomePage</a>
                     </li>
                 </ul>
             </div>
-            @*<div class="col-6 col-sm-8 col-md-8 col-lg-10 pt-2" id="content-area">*@
             <div class="col pt-2" id="content-area">
-                <div class="container-fluid p-0">
+                <div class="container p-0" style="width:inherit">
                     <main role="main" class="pb-3">
                         @RenderBody()
                     </main>
