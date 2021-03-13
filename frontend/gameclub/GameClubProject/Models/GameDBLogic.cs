@@ -123,30 +123,21 @@ namespace GameClubProject.Models
                         game.Id = gameId;
                     }
 
-                    //if (game.Screenshots != null)
-                    //{
-                    //    foreach (var screenshot in game.Screenshots)
-                    //    {
-                    //        screenshot.gameId = gameId;
-                    //    }
-                    //}
+                    if (game.Screenshots != null)
+                    {
+                        foreach (var screenshot in game.Screenshots.Values)
+                        {
+                            screenshot.gameid = gameId;
+                        }
+                    }
 
-                    //if (game.videos != null)
-                    //{
-                    //    foreach (var videos in game.videos)
-                    //    {
-                    //        videos.gameId = gameId;
-                    //    }
-                    //}
-
-                    //if (game.expansions != null)
-                    //{
-                    //    foreach (var expansion in game.expansions)
-                    //    {
-                    //        expansion.gameId = gameId;
-                    //    }
-
-                    //}
+                    if (game.Videos != null)
+                    {
+                        foreach (var videos in game.Videos.Values)
+                        {
+                            videos.gameid = gameId;
+                        }
+                    }
 
                 }
                 return games[0];

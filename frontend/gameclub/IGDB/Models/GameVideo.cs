@@ -8,5 +8,6 @@ namespace IGDB.Models
     public long? Id { get; set; }
     public string Name { get; set; }
     public string VideoId { get; set; }
-  }
+    public int? gameid { get; set; }
+    }
 }

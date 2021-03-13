@@ -63,15 +63,10 @@ namespace GameClubProject.Controllers
             return HtmlEncoder.Default.Encode($"Hello {name}, NumTimes is: {numTimes}");
         }
 
-        //[HttpGet("Home")]
+        
         public async Task<IActionResult> HomeAsync()
         {
             _api = new IGDB.IGDBClient(IGDB_CLIENT_ID, IGDB_CLIENT_SECRET);
-            //var games = await _api.QueryAsync<Game>(IGDBClient.Endpoints.Games, "fields *; limit 50;");
-            //var gamer=GameDBLogic.FetchGenres();
-            //var query = GameDBLogic.queryString(MinRating, MaxRating, genre: genre, platform: platform);
-            //var games = await _api.QueryAsync<Game>(IGDBClient.Endpoints.Games, "fields *; limit 50;");                     
-
             int? Maxrating = HttpContext.Session.GetInt32("MaxRating");
             int? Minrating = HttpContext.Session.GetInt32("MinRating");
             if (Maxrating == null)
@@ -122,7 +117,41 @@ namespace GameClubProject.Controllers
 
             };            
             return View("Dashboard", DashboardBundle);
-        } 
+        }
+
+
+        [HttpGet("ShowGame/{gameId}")]
+        public async Task<IActionResult> ShowGame(int gameId)
+        {
+            var gamePageDetail = new GamePageDetail();
+            //gameProfileBundle.user = dbContext.Users.FirstOrDefault(user => user.user_id == user_id);
+            //if (dbContext.Games.FirstOrDefault(game => game.gameId == gameId) == null)
+            //{
+            gamePageDetail.game = await GameDBLogic.ShowOneGame(gameId);
+            //SaveGame(game);
+            //}
+            /*
+            gameProfileBundle.game = dbContext.Games.Include(g => g.cover)
+                                                .Include(g => g.game_Genres).ThenInclude(g => g.genre)
+                                                .Include(g => g.game_Companies).ThenInclude(invc => invc.company)
+                                                .Include(g => g.game_Platforms).ThenInclude(p => p.platform)
+                                                .Include(g => g.screenshots)
+                                                .Include(g => g.videos)
+                                                .Include(g => g.expansions).ThenInclude(e => e.cover)
+                                                .Include(g => g.Reviews).ThenInclude(r => r.reviewer)
+                                                .Include(g => g.Reviews).ThenInclude(r => r.likeCounts)
+                                                .Include(g => g.Reviews).ThenInclude(r => r.responses)
+                                                .FirstOrDefault(g => g.gameId == gameId);
+
+            
+            gameProfileBundle.formReview = new Review();
+            gameProfileBundle.Comment = new ReviewResponse();
+            ViewBag.userName = HttpContext.Session.GetString("userName");
+            */
+            return View("GameDetail", gamePageDetail);
+
+        }
+
 
     }
 }

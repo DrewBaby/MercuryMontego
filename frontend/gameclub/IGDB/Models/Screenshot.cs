@@ -11,5 +11,7 @@ namespace IGDB.Models
     public string ImageId { get; set; }
     public string Url { get; set; }
     public int? Width { get; set; }
-  }
+    public int? gameid { get; set; }
+
+    }
 }
