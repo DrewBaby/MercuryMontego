@@ -5,13 +5,14 @@ using System.Collections.Generic;
 
 namespace GameClubProject.Models
 {
-    public partial class PersonalUserTrackedGame
+    public partial class VideoGameAlternativeName
     {
         public int PKey { get; set; }
-        public string UserId { get; set; }
         public string GameId { get; set; }
+        public string GameTitle { get; set; }
+        public string AltName { get; set; }
+        public string CheckSum { get; set; }
 
         public virtual VideoGameMain Game { get; set; }
-        public virtual UserAccount User { get; set; }
     }
 }

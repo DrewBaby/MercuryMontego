@@ -3,7 +3,8 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace GameClubProject
+namespace GameClubProject.Models
+
 {
     public partial class UserAccount
     {

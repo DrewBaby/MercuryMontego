@@ -5,16 +5,16 @@ using System.Collections.Generic;
 
 namespace GameClubProject.Models
 {
-    public partial class VideoGameInvolvedCompany
+    public partial class VideoGameArtwork
     {
         public int PKey { get; set; }
         public string GameId { get; set; }
-        public string CompanyName { get; set; }
-        public string ParentCompany { get; set; }
-        public DateTime? StartDate { get; set; }
+        public string ImageId { get; set; }
+        public bool? AlphaChannel { get; set; }
+        public bool? Animated { get; set; }
+        public int? Height { get; set; }
+        public int? Width { get; set; }
         public string Url { get; set; }
-        public string Country { get; set; }
-        public string Description { get; set; }
 
         public virtual VideoGameMain Game { get; set; }
     }

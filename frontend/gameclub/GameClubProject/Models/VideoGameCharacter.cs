@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace GameClubProject
+namespace GameClubProject.Models
 {
     public partial class VideoGameCharacter
     {
@@ -20,8 +20,15 @@ namespace GameClubProject
         public string CountryName { get; set; }
         public string Description { get; set; }
         public int? Gender { get; set; }
+        public int? MugshotId { get; set; }
+        public bool? AlphaChannel { get; set; }
+        public bool? Animated { get; set; }
+        public string Url { get; set; }
+        public int? Height { get; set; }
+        public int? Width { get; set; }
 
         public virtual VideoGameMain Game { get; set; }
+        public virtual VideoGameCharacterAppearsIn VideoGameCharacterAppearsIn { get; set; }
         public virtual ICollection<VideoGameCharacterAlias> VideoGameCharacterAliases { get; set; }
     }
 }
