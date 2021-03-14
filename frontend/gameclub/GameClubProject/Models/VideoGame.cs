@@ -16,7 +16,7 @@ namespace GameClubProject.Models
         public string summary { get; set; }
         
         public int user_id { get; set; }
-        public Cover cover { get; set; }
+        Covers cover { get; set; }
         
         public double first_release_date { get; set; }
         public DateTime release_date { get; set; }

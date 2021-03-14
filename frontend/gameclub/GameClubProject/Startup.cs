@@ -70,9 +70,13 @@ namespace GameClubProject
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    //pattern: "{controller=Home}/{action=Index}/{id?}");
-                //name: "default",
-                pattern: "{controller=GameQuery}/{action=Home}");
+                    pattern: "{controller=GameQuery}/{action=Home}");
+                endpoints.MapControllerRoute(
+                    name: "about",
+                    pattern: "{controller=GameQuery}/{action=About}");
+                endpoints.MapControllerRoute(
+                    name: "details",
+                    pattern: "{controller=GameQuery}/{action=Details}/{id?}");
 
 
             });

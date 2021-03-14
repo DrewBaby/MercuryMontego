@@ -8,7 +8,7 @@ namespace GameClubProject.Models
     {
         [JsonProperty(PropertyName = "id")]
         public int gameId { get; set; }
-        public Cover cover { get; set; }
+        public Covers cover { get; set; }
         public string name { get; set; }
         public double rating { get; set; }
         public double popularity { get; set; }
