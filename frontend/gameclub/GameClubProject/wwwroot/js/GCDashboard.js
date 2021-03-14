@@ -161,28 +161,29 @@
     var swiper = new Swiper('.swiper-container', {
 
         effect: 'coverflow',
+        initialSlide: 2,
         grabCursor: true,
         centeredSlides: true,
         slidesPerView: 'auto',
 
         coverflowEffect: {
-        rotate: 0,
-        stretch: 0,
-        depth: 100,
-        modifier: 1,
-        slideShadows : false,
+            rotate: 50,
+            stretch: 40,
+            depth: 100,
+            modifier: 1,
+            slideShadows: false,
         },
         autoplay: {
             delay: 3000,
         },
         mousewheel: {
             invert: true,
-            forceToAxis:true,
-            sensitivity:200
+            forceToAxis: true,
+            sensitivity: 200
         },
         pagination: {
-        el: '.swiper-pagination',
-        clickable:true
+            el: '.swiper-pagination',
+            clickable: true
         },
     });
     swiper.on('autoplayStop', function () {
