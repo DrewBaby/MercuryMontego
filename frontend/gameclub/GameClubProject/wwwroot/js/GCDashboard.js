@@ -161,13 +161,14 @@
     var swiper = new Swiper('.swiper-container', {
 
         effect: 'coverflow',
+        initialSlide: 2, 
         grabCursor: true,
         centeredSlides: true,
         slidesPerView: 'auto',
 
         coverflowEffect: {
-        rotate: 0,
-        stretch: 0,
+        rotate: 50,
+        stretch: 40,
         depth: 100,
         modifier: 1,
         slideShadows : false,
