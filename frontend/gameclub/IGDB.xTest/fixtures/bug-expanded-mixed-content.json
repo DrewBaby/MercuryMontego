@@ -1,0 +1,72 @@
+[
+  {
+    "id": 32125,
+    "release_dates": [
+      {
+        "id": 164193,
+        "category": 0,
+        "created_at": 1548374400,
+        "date": 1524614400,
+        "game": 32125,
+        "human": "2018-Apr-25",
+        "m": 4,
+        "platform": 6,
+        "region": 8,
+        "updated_at": 1548374400,
+        "y": 2018
+      },
+      164715
+    ]
+  },
+  {
+    "id": 32125,
+    "release_dates": [
+      164715,
+      {
+        "id": 164193,
+        "category": 0,
+        "created_at": 1548374400,
+        "date": 1524614400,
+        "game": 32125,
+        "human": "2018-Apr-25",
+        "m": 4,
+        "platform": 6,
+        "region": 8,
+        "updated_at": 1548374400,
+        "y": 2018
+      }
+    ]
+  },
+  {
+    "id": 32125,
+    "release_dates": [
+      {
+        "id": 164193,
+        "category": 0,
+        "created_at": 1548374400,
+        "date": 1524614400,
+        "game": 32125,
+        "human": "2018-Apr-25",
+        "m": 4,
+        "platform": 6,
+        "region": 8,
+        "updated_at": 1548374400,
+        "y": 2018
+      },
+      164715,
+      {
+        "id": 164193,
+        "category": 0,
+        "created_at": 1548374400,
+        "date": 1524614400,
+        "game": 32125,
+        "human": "2018-Apr-25",
+        "m": 4,
+        "platform": 6,
+        "region": 8,
+        "updated_at": 1548374400,
+        "y": 2018
+      }
+    ]
+  }
+]

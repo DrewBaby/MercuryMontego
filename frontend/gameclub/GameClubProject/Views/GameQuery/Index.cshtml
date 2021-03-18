@@ -1,0 +1,157 @@
+﻿@model GameClubProject.Controllers.IndexReel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
+    <style type="text/css">
+        .swiper-container {
+            width: 65%;
+            height: 100%;
+        }
+
+        .swiper-slide {
+            text-align: center;
+            font-size: 18px;
+            background: #fff;
+            /* Center slide text vertically */
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        .description-text {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            font-size: 16px;
+        }
+        @@media screen and (max-width: 770px) {
+            .description-text {
+                font-size: 12px;
+            }
+        }
+    </style>
+}
+
+
+    <!-- Swiper -->
+    <div class="swiper-container swiper1 my-4">
+        <h5>Top Rated Games</h5>
+        <div class="swiper-wrapper pt-2 pb-5">
+            @foreach (var item in Model.TopRatedGames)
+            {
+                <div class="swiper-slide">
+                    <div class="card" style="width: 12rem;">
+                        <img src="@Html.DisplayFor(modelItem => item.Cover.Url)" class="card-img-top" alt="@Html.DisplayFor(modelItem => item.Game.Name)">
+                        <div class="card-body bg-dark px-2">
+                            <p class="card-text text-light description-text">@Html.ActionLink(item.Game.Name, "Details", new { id = item.Game.Id }, new { style = "text-decoration:none; color: white;" })</p>
+                        </div>
+                    </div>
+                </div>
+                                                                        }
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination swiper-pagination1 mt-1"></div>
+    </div>
+    
+    <!-- Swiper -->
+    <div class="swiper-container swiper2 my-4">
+        <h5>@Html.DisplayFor(modelItem => Model.GenreATitle)</h5>
+        <div class="swiper-wrapper pt-2 pb-5">
+            @foreach (var item in Model.GenreAGames)
+            {
+                <div class="swiper-slide">
+                    <div class="card" style="width: 12rem;">
+                        <img src="@Html.DisplayFor(modelItem => item.Cover.Url)" class="card-img-top" alt="@Html.DisplayFor(modelItem => item.Game.Name)">
+                        <div class="card-body bg-dark px-2">
+                            <p class="card-text text-light description-text">@Html.ActionLink(item.Game.Name, "Details", new { id = item.Game.Id }, new { style = "text-decoration:none; color: white;" })</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination swiper-pagination2 mt-1"></div>
+    </div>
+    
+    <!-- Swiper -->
+    <div class="swiper-container swiper3 my-4">
+        <h5>@Html.DisplayFor(modelItem => Model.GenreBTitle)</h5>
+        <div class="swiper-wrapper pt-2 pb-5">
+            @foreach (var item in Model.GenreBGames)
+            {
+                <div class="swiper-slide">
+                    <div class="card" style="width: 12rem;">
+                        <img src="@Html.DisplayFor(modelItem => item.Cover.Url)" class="card-img-top" alt="@Html.DisplayFor(modelItem => item.Game.Name)">
+                        <div class="card-body bg-dark px-2">
+                            <p class="card-text text-light description-text">@Html.ActionLink(item.Game.Name, "Details", new { id = item.Game.Id }, new { style = "text-decoration:none; color: white;" })</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination swiper-pagination3 mt-1"></div>
+    </div>
+
+@section Scripts {
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/js/swiper.min.js"></script>
+    <script>
+        var swiper1 = new Swiper('.swiper1', {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            pagination: {
+                el: '.swiper-pagination1',
+                clickable: true,
+            },
+        });
+        var swiper2 = new Swiper('.swiper2', {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            pagination: {
+                el: '.swiper-pagination2',
+                clickable: true,
+            },
+        });
+        var swiper3 = new Swiper('.swiper3', {
+            slidesPerView: 3,
+            spaceBetween: 30,
+            pagination: {
+                el: '.swiper-pagination3',
+                clickable: true,
+            },
+        });
+    </script>
+}
+
+@*@foreach (var item in Model.TopRatedGames)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Game.Id)</td>
+            <td>@Html.DisplayFor(modelItem => item.Game.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Cover.Id)</td>
+            <td>@Html.DisplayFor(modelItem => item.Cover.Url)</td>
+            <td>@Html.DisplayFor(modelItem => item.Cover.Height)</td>
+            <td>@Html.DisplayFor(modelItem => item.Cover.Width)</td>
+            <td>@Html.DisplayFor(modelItem => item.Cover.AlphaChannel)</td>
+            <td>@Html.DisplayFor(modelItem => item.Cover.Checksum)</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }*@

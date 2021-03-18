@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GameClubProject.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace GameClubProject
 {
@@ -24,6 +26,9 @@ namespace GameClubProject
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext <GameclubDBContext>(options =>
+               options.UseSqlServer(Configuration.GetConnectionString("VideoGameContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,8 +54,17 @@ namespace GameClubProject
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    //name: "default",
+                    //pattern: "{controller=Home}/{action=Index}/{id?}");
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=GameQuery}/{action=igdbquery}");
+                endpoints.MapControllerRoute(
+                    name: "about",
+                    pattern: "{controller=GameQuery}/{action=About}");
+                endpoints.MapControllerRoute(
+                    name: "details",
+                    pattern: "{controller=GameQuery}/{action=Details}/{id?}");
+
             });
         }
     }
