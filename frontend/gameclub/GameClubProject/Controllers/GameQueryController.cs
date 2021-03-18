@@ -9,15 +9,24 @@ using IGDB;
 using IGDB.Models;
 using GameClubProject.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
 
 namespace GameClubProject.Controllers
 {
+    [Authorize]
     public class GameQueryController : Controller
     {      
 
         private protected string IGDB_CLIENT_ID = "suir6rwr94fhs2s3x8jcyfqfjpd6lj";
         private protected string IGDB_CLIENT_SECRET = "a07fcbs0o7est8f2p9o6qpk09t5zfw";     
         private protected IGDBClient _api;
+        private readonly GameclubDBContext dbContext;
+
+        public GameQueryController(GameclubDBContext context)
+        {
+            dbContext = context;
+        }
 
 
         public async Task<DashboardGameBundle> FetchGames(string gameName = null)
@@ -45,7 +54,17 @@ namespace GameClubProject.Controllers
 
             return DashboardBundle;
         }
-        
+
+        [AllowAnonymous]
+        public IActionResult About()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        public IActionResult Privacy()
+        {
+            return View();
+        }
         //public IActionResult Index()
         //{
         //    return View();
@@ -57,13 +76,13 @@ namespace GameClubProject.Controllers
         //{
         //    return "This is the Welcome action method...";
         //}
-
+        [AllowAnonymous]
         public string Welcome(string name, int numTimes = 1)
         {
             return HtmlEncoder.Default.Encode($"Hello {name}, NumTimes is: {numTimes}");
         }
 
-        
+        [AllowAnonymous]
         public async Task<IActionResult> HomeAsync()
         {
             _api = new IGDB.IGDBClient(IGDB_CLIENT_ID, IGDB_CLIENT_SECRET);
@@ -235,12 +254,7 @@ namespace GameClubProject.Controllers
             var game = await _api.QueryAsync<Game>(IGDBClient.Endpoints.Games, query: "fields *; where id =" + id + "; limit 1;");
             Game gameDetail = game[0];
             return View(gameDetail);
-        }
-
-        public IActionResult About()
-        {
-            return View();
-        }
+        }       
 
 
         // Helper methods 

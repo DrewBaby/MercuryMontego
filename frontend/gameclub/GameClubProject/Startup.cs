@@ -10,7 +10,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using GameClubProject.Models;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 namespace GameClubProject
 {
     public class Startup
@@ -35,9 +36,25 @@ namespace GameClubProject
                 services.AddDbContext <GameclubDBContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("GameclubDBContext"))
                 );
-
             //Automatically Perform Database Migration
-            //services.BuildServiceProvider().GetService<GameclubDBContext>().Database.Migrate();
+            //services.BuildServiceProvider().GetService<GameclubDBContext>().Database.Migrate();           
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+            .AddCookie(options =>
+            {
+            options.LoginPath = "/google-login"; // Must be lowercase
+            options.ExpireTimeSpan = TimeSpan.FromMinutes(2);  //Set maximum timeout for Google sign in page until you have to reauth. 
+            
+            })
+            .AddGoogle(options =>
+            {
+                IConfigurationSection googleAuthNSection =Configuration.GetSection("Authentication:Google");
+                options.ClientId = googleAuthNSection["ClientId"];
+                options.ClientSecret = googleAuthNSection["ClientSecret"];
+            });
 
             services.AddMvc();
             services.AddDistributedMemoryCache(); // Adds a default in-memory implementation of IDistributedCache
@@ -59,9 +76,9 @@ namespace GameClubProject
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
             
             app.UseSession();
