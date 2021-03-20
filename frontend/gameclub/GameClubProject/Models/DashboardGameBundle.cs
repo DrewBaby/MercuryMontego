@@ -10,6 +10,9 @@ namespace GameClubProject.Models
     {
         public List<Game> games { get; set; }
         public List<PopularGame> popularGames { get; set; }
+        public List<PopularGame> genreAGames { get; set; }
+        public List<PopularGame> genreBGames { get; set; }
+        public List<PopularGame> genreCGames { get; set; }
         public String user { get; set; }
         public RatingForm rating_form { get; set; }
     }

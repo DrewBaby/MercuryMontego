@@ -59,10 +59,65 @@ namespace GameClubProject.Models
             }
         }
 
+        public static async Task<List<PopularGame>> LoadGenreAGames()
+        {
+            var _api = new IGDB.IGDBClient(IGDB_CLIENT_ID, IGDB_CLIENT_SECRET);
+            var query = (@"
+            fields screenshots.url,cover.url,cover.image_id,cover.url,name,rating,first_release_date,platforms.name,genres.name;
+            where cover != null & rating != null & rating > 90 & genres = (12); limit 10;");
+            
+            try
+            {
+                var genreAGames = await _api.QueryAsync<PopularGame>(IGDBClient.Endpoints.Games, query);
+                return genreAGames;
+            }
+            catch
+            {
+                var emptyGameList = new List<PopularGame>();
+                return emptyGameList;
+            }
+        }
+        public static async Task<List<PopularGame>> LoadGenreBGames()
+        {
+            var _api = new IGDB.IGDBClient(IGDB_CLIENT_ID, IGDB_CLIENT_SECRET);
+            var query = (@"
+            fields screenshots.url,cover.url,cover.image_id,cover.url,name,rating,first_release_date,platforms.name,genres.name;
+            where cover != null & rating != null & rating > 90 & genres = (5); limit 10;");
+
+            try
+            {
+                var genreBGames = await _api.QueryAsync<PopularGame>(IGDBClient.Endpoints.Games, query);
+                return genreBGames;
+            }
+            catch
+            {
+                var emptyGameList = new List<PopularGame>();
+                return emptyGameList;
+            }
+        }
+        public static async Task<List<PopularGame>> LoadGenreCGames()
+        {
+            var _api = new IGDB.IGDBClient(IGDB_CLIENT_ID, IGDB_CLIENT_SECRET);
+            var query = (@"
+            fields screenshots.url,cover.url,cover.image_id,cover.url,name,rating,first_release_date,platforms.name,genres.name;
+            where cover != null & rating != null & rating > 90 & genres = (31); limit 10;");
+
+            try
+            {
+                var genreBGames = await _api.QueryAsync<PopularGame>(IGDBClient.Endpoints.Games, query);
+                return genreBGames;
+            }
+            catch
+            {
+                var emptyGameList = new List<PopularGame>();
+                return emptyGameList;
+            }
+        }
+
         public static async Task<Filters> FetchGenres()
         {
             var _api = new IGDB.IGDBClient(IGDB_CLIENT_ID, IGDB_CLIENT_SECRET);            
-            var query = (@"fields name,slug; limit 20; ");
+            var query = (@"fields name,slug; limit 30; ");
             try
             {
                 var genres = await _api.QueryAsync<Genre>(IGDBClient.Endpoints.Genres, query);

@@ -12,6 +12,7 @@ namespace GameClubProject.Models
         public int cover_id { get; set; }
         public int gameId { get; set; }
         public string image_id { get; set; }
+        public string url { get; set; }
         public DateTime created_at { get; set; } = DateTime.Now;
         public DateTime updated_at { get; set; } = DateTime.Now;
 

@@ -24,7 +24,6 @@ nav i {
     padding-top: 50px;
     padding-bottom: 50px;
 }
-
 .swiper-slide {
     background-position: center;
     background-size: cover;
@@ -141,7 +140,45 @@ hr {
     color: orange !important;
 }
 
+/*START Genre slider modifications*/
+#swiper-container-genres {
+    width: 100%;
+    height: 350px !important;
+    padding-top: 0px !important;
+}
+#swiper-slide-genres {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    width: 10rem;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
 
+.description-text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 16px;
+}
+
+@media screen and (max-width: 770px) {
+    .description-text {
+        font-size: 12px;
+    }
+}
+/*END Genre slider modifications*/
 
 @media screen and (min-width: 1500px) {
 

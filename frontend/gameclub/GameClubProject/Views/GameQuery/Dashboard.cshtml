@@ -29,61 +29,130 @@
 </div>
 
 <hr>
-<div class="container">
-    <ul class="list-inline">
-        @if (Model.games == null)
-        {
-            <h4 class="font-weight-light mt-5 bg-danger text-white text-center py-3">No Games Found!!</h4>
-        }
-        else
-        {
-            @foreach (var game in Model.games)
+<div class="container row flex-nowrap">
+    <div class="col-5" id="search-list">
+        <ul class="list-inline">
+            @if (Model.games == null)
             {
-                <li class="font-weight-light mb-3 game">
-
-                    @if (game.Cover == null)
-                    {
-                        <img src="~/images/small_unavailable-image.png" alt="game picture" srcset="" class="gamePic rounded">
-                    }
-                    else
-                    {
-                        <img src="//images.igdb.com/igdb/image/upload/t_cover_big/@game.Cover.Value.ImageId@Html.Raw(".jpg")" alt="game picture" srcset="" class="gamePic rounded">
-                    }
-                    <div class="d-inline-block ml-2 mt-2 gameDescription">
-
-                        <a href="~/ShowGame/@game.Id"><h6 class="mb-0">@game.Name</h6></a>
-                        <small class="mb-0 d-block releaseDate ml-1">@game.release_date.ToString("MMMM dd, yyyy")</small>
-                        @if (game.Rating == 0)
-                        {
-                            <small class="text-muted d-block mt-3">Rating Unavailable</small>
-                        }
-                        else
-                        {
-                            <div class="stars-outer d-block mt-2">
-                                <div class="stars-inner " style="width: @game.Rating.ToString()px;"></div>
-                            </div>
-                        }
-
-                        @if (game.Platforms == null)
-                        {
-                            <small class="d-inline-block mb-0 text-muted">Platforms unavailable</small>
-                        }
-                        else
-                        {
-                            @foreach (var platform in game.Platforms.Values)
-                            {
-                                <small class="d-inline-block mb-0 text-muted">@platform.Name /</small>
-                            }
-                        }
-
-
-                    </div>
-
-                </li>
+                <h4 class="font-weight-light mt-5 bg-danger text-white text-center py-3">No Games Found!!</h4>
             }
-        }
-    </ul>
+            else
+            {
+                @foreach (var game in Model.games)
+                {
+                    <li class="font-weight-light mb-3 game">
 
+                        @if (game.Cover == null)
+                        {
+                            <img src="~/images/small_unavailable-image.png" alt="game picture" srcset="" class="gamePic rounded">
+                        }
+                        else
+                        {
+                            <img src="//images.igdb.com/igdb/image/upload/t_cover_big/@game.Cover.Value.ImageId@Html.Raw(".jpg")" alt="game picture" srcset="" class="gamePic rounded">
+                        }
+                        <div class="d-inline-block ml-2 mt-2 gameDescription">
+
+                            <a href="~/ShowGame/@game.Id"><h6 class="mb-0">@game.Name</h6></a>
+                            <small class="mb-0 d-block releaseDate ml-1">@game.release_date.ToString("MMMM dd, yyyy")</small>
+                            @if (game.Rating == 0)
+                            {
+                                <small class="text-muted d-block mt-3">Rating Unavailable</small>
+                            }
+                            else
+                            {
+                                <div class="stars-outer d-block mt-2">
+                                    <div class="stars-inner " style="width: @game.Rating.ToString()px;"></div>
+                                </div>
+                            }
+
+                            @if (game.Platforms == null)
+                            {
+                                <small class="d-inline-block mb-0 text-muted">Platforms unavailable</small>
+                            }
+                            else
+                            {
+                                @foreach (var platform in game.Platforms.Values)
+                                {
+                                    <small class="d-inline-block mb-0 text-muted">@platform.Name /</small>
+                                }
+                            }
+
+
+                        </div>
+
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+    <div class="col-7">
+
+
+        <div class="container">
+            <!-- Swiper 1: Genre - RPG -->
+            <div class="swiper-container swiper2 my-4" id="swiper-container-genres" style="height: 350px !important;">
+                <h5>Role-playing (RPG)</h5>
+                <div class="swiper-wrapper">
+                    @foreach (var item in Model.genreAGames)
+                    {
+                        <div class="swiper-slide" id="swiper-slide-genres" style="width: 150px; height: 200px;">
+                            <div class="card" style="width: inherit; height: inherit;">
+                                <a href="ShowGame/@item.gameId"><img src="@Html.DisplayFor(modelItem => item.cover.url)" class="card-img-top" alt="@Html.DisplayFor(modelItem => item.name)"></a>
+                                <div class="card-body bg-dark px-2">
+                                    <a href="ShowGame/@item.gameId"> <p class="card-text text-light description-text">@item.name</p> </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination swiper-pagination2 mt-1"></div>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Swiper 2: Genre - Shooter -->
+            <div class="swiper-container swiper2 my-4" id="swiper-container-genres" style="height: 350px !important;">
+                <h5>Shooter</h5>
+                <div class="swiper-wrapper">
+                    @foreach (var item in Model.genreBGames)
+                    {
+                        <div class="swiper-slide" id="swiper-slide-genres" style="width: 150px; height: 200px;">
+                            <div class="card" style="width: inherit; height: inherit;">
+                                <a href="ShowGame/@item.gameId"><img src="@Html.DisplayFor(modelItem => item.cover.url)" class="card-img-top" alt="@Html.DisplayFor(modelItem => item.name)"></a>
+                                <div class="card-body bg-dark px-2">
+                                    <a href="ShowGame/@item.gameId"> <p class="card-text text-light description-text">@item.name</p> </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination swiper-pagination2 mt-1"></div>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Swiper 2: Genre - Adventure -->
+            <div class="swiper-container swiper2 my-4" id="swiper-container-genres" style="height: 350px !important;">
+                <h5>Adventure</h5>
+                <div class="swiper-wrapper">
+                    @foreach (var item in Model.genreCGames)
+                    {
+                        <div class="swiper-slide" id="swiper-slide-genres" style="width: 150px; height: 200px;">
+                            <div class="card" style="width: inherit; height: inherit;">
+                                <a href="ShowGame/@item.gameId"><img src="@Html.DisplayFor(modelItem => item.cover.url)" class="card-img-top" alt="@Html.DisplayFor(modelItem => item.name)"></a>
+                                <div class="card-body bg-dark px-2">
+                                    <a href="ShowGame/@item.gameId"> <p class="card-text text-light description-text">@item.name</p> </a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <!-- Add Pagination -->
+                <div class="swiper-pagination swiper-pagination2 mt-1"></div>
+            </div>
+        </div>
+
+    </div>
 </div>
-
-
