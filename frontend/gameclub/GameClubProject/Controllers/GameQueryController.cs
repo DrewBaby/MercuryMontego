@@ -13,8 +13,7 @@ using Microsoft.AspNetCore.Http;
 namespace GameClubProject.Controllers
 {
     public class GameQueryController : Controller
-    {      
-
+    {
         private protected string IGDB_CLIENT_ID = "suir6rwr94fhs2s3x8jcyfqfjpd6lj";
         private protected string IGDB_CLIENT_SECRET = "a07fcbs0o7est8f2p9o6qpk09t5zfw";     
         private protected IGDBClient _api;

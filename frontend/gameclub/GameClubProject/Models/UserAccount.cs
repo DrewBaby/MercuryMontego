@@ -4,7 +4,6 @@ using System.Collections.Generic;
 #nullable disable
 
 namespace GameClubProject.Models
-
 {
     public partial class UserAccount
     {
@@ -18,7 +17,7 @@ namespace GameClubProject.Models
         public int PKey { get; set; }
         public string UserId { get; set; }
         public string UserName { get; set; }
-        public int MembershipStatusId { get; set; }
+        public int? MembershipStatusId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }

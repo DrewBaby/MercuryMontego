@@ -5,8 +5,8 @@ namespace GameClubProject.Models
 {
     public class Api
     {
-        private protected string IGDB_CLIENT_ID;
-        private protected string IGDB_CLIENT_SECRET;
+        public string IGDB_CLIENT_ID;
+        public string IGDB_CLIENT_SECRET;
 
         public Api()
         {
@@ -21,9 +21,9 @@ namespace GameClubProject.Models
                 .UseInternalServiceProvider(serviceProvider);
             _context = new GameclubDBContext(builder.Options);
 
-            //var data = _context.IGDB_API.Find(1);
-            //IGDB_CLIENT_ID = data.IGDB_CLIENT_ID;
-            //IGDB_CLIENT_SECRET = data.IGDB_CLIENT_SECRET;
+            var data = _context.IgdbApis.Find(1);
+            IGDB_CLIENT_ID = data.IgdbClientId.ToString();
+            IGDB_CLIENT_SECRET = data.IgdbClientSecret.ToString();
             _context.Dispose();
         }
     }

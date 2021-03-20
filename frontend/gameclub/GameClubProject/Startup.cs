@@ -31,9 +31,9 @@ namespace GameClubProject
                 services.AddDbContext<GameclubDBContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("GameclubDBContextProd"))
                 );
-            else 
-                services.AddDbContext <GameclubDBContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("GameclubDBContext"))
+            else
+                services.AddDbContext<GameclubDBContext>(options =>
+                   options.UseSqlServer(Configuration.GetConnectionString("GameclubDBContext"))
                 );
 
             //Automatically Perform Database Migration
