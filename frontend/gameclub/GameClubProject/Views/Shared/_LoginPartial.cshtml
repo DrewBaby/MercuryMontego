@@ -11,14 +11,24 @@
             <li>
                 @Html.ActionLink("Hello " + User.Identity.Name + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
             </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+            <li><a class = "btn btn-outline-primary" href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
         </ul>
     }
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
+<ul class="nav navbar-nav navbar-right">
+    @*
         <li>@Html.ActionLink("Register", "register", "LogonProfile", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         <li>@Html.ActionLink("Log in", "login", "LogonProfile", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+    *@
+    @Html.ActionLink("Register", "register", "LogonProfile", routeValues: new
+{
+    @returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString(), ViewContext.RouteData.Values["id"])
+},
+         htmlAttributes: new { @class = "btn btn-outline-primary",  id = "registerLink" })
+    @Html.ActionLink("Log in", "login", "LogonProfile", routeValues: new { @returnUrl = Url.Action(ViewContext.RouteData.Values["action"].ToString(), ViewContext.RouteData.Values["controller"].ToString(), ViewContext.RouteData.Values["id"]) },
+                    htmlAttributes: new { @class = "btn btn-outline-primary",  id = "loginLink" })
+
+</ul>
 }

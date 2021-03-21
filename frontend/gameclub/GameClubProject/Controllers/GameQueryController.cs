@@ -149,8 +149,6 @@ namespace GameClubProject.Controllers
 
         }
 
-
-
         // Added Travis section to this code    
         // I am adusting it to to compensate in the difference in changes made to the _api.QueryAsync method.
         // --- List of views go here ---

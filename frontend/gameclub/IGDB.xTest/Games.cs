@@ -29,7 +29,7 @@ namespace IGDB.xTest
 
             Assert.NotNull(games);
             Assert.True(10 == 10);
-            Assert.True(games.Length == 10);
+            Assert.True(games.Count == 10);
             
         }
 
@@ -39,7 +39,7 @@ namespace IGDB.xTest
             var games = await _api.QueryAsync<Game>(IGDBClient.Endpoints.Games, "fields id,name,genres; where id = 4;");
 
             Assert.NotNull(games);
-            Assert.True(games.Length == 1);
+            Assert.True(games.Count == 1);
 
             var game = games[0];
 

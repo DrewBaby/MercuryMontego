@@ -148,6 +148,10 @@ namespace GameClubProject.Models
             }
 
         }
+
+
+
+
         public static string queryString(int MinRating, int MaxRating, string genre, string platform)
         {
             string query;

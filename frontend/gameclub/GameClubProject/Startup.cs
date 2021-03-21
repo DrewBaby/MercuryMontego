@@ -12,6 +12,7 @@ using GameClubProject.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using GameClubProject.Data;
 namespace GameClubProject
 {
     public class Startup
@@ -36,6 +37,10 @@ namespace GameClubProject
                 services.AddDbContext <GameclubDBContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("GameclubDBContext"))
                 );
+
+            services.AddScoped <IGameClubData, GameclubRepository>();
+
+            
             //Automatically Perform Database Migration
             //services.BuildServiceProvider().GetService<GameclubDBContext>().Database.Migrate();           
 
@@ -46,8 +51,7 @@ namespace GameClubProject
             .AddCookie(options =>
             {
             options.LoginPath = "/google-login"; // Must be lowercase
-            options.ExpireTimeSpan = TimeSpan.FromMinutes(2);  //Set maximum timeout for Google sign in page until you have to reauth. 
-            
+            options.ExpireTimeSpan = TimeSpan.FromMinutes(2);  //Set maximum timeout for Google sign in page until you have to reauth.             
             })
             .AddGoogle(options =>
             {

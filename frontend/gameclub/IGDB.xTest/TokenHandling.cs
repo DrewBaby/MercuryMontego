@@ -27,7 +27,7 @@ namespace IGDB.xTest
 
       var games = await invalidTokenClient.QueryAsync<Game>("games");
 
-      Assert.True(games.Length > 0);
+      Assert.True(games.Count > 0);
       Assert.True(tokenStore.Invalidated);
     }
 
