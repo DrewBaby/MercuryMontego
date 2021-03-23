@@ -1,10 +1,7 @@
-﻿﻿/* 
+﻿﻿ /* 
 Site wide changes 
 Andrew Lawson - Merge Branches and incorporate Travis Changes into main Development Branch   - 03/22/2021
 */
-
-
-
 
 body {
     background-color: inherit;
@@ -16,6 +13,7 @@ body {
     padding-top: 50px;
     padding-bottom: 50px;
 }
+
 .swiper-slide {
     background-position: center;
     background-size: cover;
@@ -45,11 +43,11 @@ body {
 .popularGameText {
     font-family: 'Monoton', cursive;
     text-transform: uppercase;
-   
 }
 
 hr {
     border-top: 1px solid rgb(75, 75, 75);
+}
 
 .gamePic {
     height: 120px !important;
@@ -93,7 +91,7 @@ hr {
 }
 
 .filters {
-    height: 125px;
+    height: auto;
 }
 
 .filter-tag small {
@@ -113,6 +111,7 @@ hr {
     height: 350px !important;
     padding-top: 0px !important;
 }
+
 #swiper-slide-genres {
     text-align: center;
     font-size: 18px;
@@ -151,7 +150,5 @@ hr {
 @media screen and (max-width: 420px) {
     .popularGameText {
         margin-top: 130px !important;
-        
     }
-   
 }

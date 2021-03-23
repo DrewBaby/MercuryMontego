@@ -21,7 +21,7 @@ namespace GameClubProject.Models
             var games = await _api.QueryAsync<Game>(IGDBClient.Endpoints.Games, query);
             try
             {
-                System.DateTime dateTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);                
+                System.DateTime dateTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
                 foreach (var game in games)
                 {
                     //Added the ability to convert from decimal to datetime format. 
@@ -47,7 +47,7 @@ namespace GameClubProject.Models
 
             try
             {
-                var PopularGames = await _api.QueryAsync<PopularGame>(IGDBClient.Endpoints.Games, query);                
+                var PopularGames = await _api.QueryAsync<PopularGame>(IGDBClient.Endpoints.Games, query);
                 return PopularGames;
             }
             catch
@@ -64,7 +64,7 @@ namespace GameClubProject.Models
             var query = (@"
             fields screenshots.url,cover.url,cover.image_id,cover.url,name,rating,first_release_date,platforms.name,genres.name;
             where cover != null & rating != null & rating > 90 & genres = (12); limit 10;");
-            
+
             try
             {
                 var genreAGames = await _api.QueryAsync<PopularGame>(IGDBClient.Endpoints.Games, query);
@@ -115,7 +115,7 @@ namespace GameClubProject.Models
 
         public static async Task<Filters> FetchGenres()
         {
-            var _api = new IGDB.IGDBClient(IGDB_CLIENT_ID, IGDB_CLIENT_SECRET);            
+            var _api = new IGDB.IGDBClient(IGDB_CLIENT_ID, IGDB_CLIENT_SECRET);
             var query = (@"fields name,slug; limit 30; ");
             try
             {
@@ -140,7 +140,7 @@ namespace GameClubProject.Models
             try
             {
                 var games = await _api.QueryAsync<Game>(IGDBClient.Endpoints.Games, query);
-                System.DateTime dateTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);                
+                System.DateTime dateTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
                 foreach (var game in games)
                 {
                     double f = game.First_Release_Date;
@@ -159,7 +159,7 @@ namespace GameClubProject.Models
             var _api = new IGDB.IGDBClient(IGDB_CLIENT_ID, IGDB_CLIENT_SECRET);
             var query = $@"
                 fields genres.name,cover.image_id,name,
-                rating,first_release_date,platforms.name,
+                rating,first_release_date,platforms.name,artworks,artworks.image_id,
                 storyline,summary,screenshots.image_id,videos.video_id,videos.name,
                 expansions.name,expansions.cover.image_id,involved_companies.company.name,similar_games.name,similar_games.cover.image_id;
                 where id={gameId};";
@@ -211,7 +211,7 @@ namespace GameClubProject.Models
 
         }
 
-        
+
 
 
         public static string queryString(int MinRating, int MaxRating, string genre, string platform)

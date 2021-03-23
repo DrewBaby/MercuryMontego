@@ -1,7 +1,7 @@
 ﻿@model DashboardGameBundle
 
 @section Styles{
-    <link rel="stylesheet" href="~/css/GCDashboard.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/css/GCDashboard.css" asp-append-version="true" />
 }
 
 <h1 class="font-weight-bold text-center mt-5 popularGameText">Popular <span class="gameText">Games</span> </h1>
@@ -32,7 +32,7 @@
 </div>
 
 <hr>
-<div class="container row flex-nowrap">
+<div class="container">
     <div class="mt-2 mb-3 filterBox">
         <div class="filtersTitle">
             <a href="~/fetchGenres" data-requested="no" class="genres">Genres</a>
@@ -60,6 +60,8 @@
         </div>
         <div class="mt-2 Platformsfilters filters"></div>
     </div>
+</div>
+<div class="container row flex-nowrap">
     <div class="col-7 col-md-7 col-lg-5" id="search-list">
         <ul class="list-inline">
             @if (Model.games == null)
@@ -86,36 +88,36 @@
                                 <div class="col-6 col-sm-6 col-md-8 col-lg-8">
                                     <div class="d-inline-block ml-2 mt-2 gameDescription overflow-text">
                                         <a href="~/ShowGame/@game.Id"><h6 class="mb-0">@game.Name</h6></a>
-                                            @if (game.ReleaseDates != null)
-                                            {
-                                                <small class="mb-0 d-block releaseDate ml-1">@game.ReleaseDates.ToString().Substring(0, 10)</small>
-                                            }
-                                            else
-                                            {
-                                                <small class="text-muted d-block mt-3">Release Date Unavailable</small>
-                                            }
+                                        @if (game.release_date != null)
+                                        {
+                                            <small class="mb-0 d-block releaseDate ml-1">@game.release_date.ToString("MMMM dd, yyyy")</small>
+                                        }
+                                        else
+                                        {
+                                            <small class="text-muted d-block mt-3">Release Date Unavailable</small>
+                                        }
 
-                                            @if (game.Rating == 0)
+                                        @if (game.Rating == 0)
+                                        {
+                                            <small class="text-muted d-block mt-3">Rating Unavailable</small>
+                                        }
+                                        else
+                                        {
+                                            <div class="stars-outer d-block mt-2">
+                                                <div class="stars-inner " style="width: @game.Rating.ToString()px;"></div>
+                                            </div>
+                                        }
+                                        @if (game.Platforms == null)
+                                        {
+                                            <small class="d-inline-block mb-0 text-muted">Platforms unavailable</small>
+                                        }
+                                        else
+                                        {
+                                            @foreach (var platform in game.Platforms.Values)
                                             {
-                                                <small class="text-muted d-block mt-3">Rating Unavailable</small>
+                                                <small class="d-inline-block mb-0 text-muted">@platform.Name /</small>
                                             }
-                                            else
-                                            {
-                                                <div class="stars-outer d-block mt-2">
-                                                    <div class="stars-inner " style="width: @game.Rating.ToString()px;"></div>
-                                                </div>
-                                            }
-                                            @if (game.Platforms == null)
-                                            {
-                                                <small class="d-inline-block mb-0 text-muted">Platforms unavailable</small>
-                                            }
-                                            else
-                                            {
-                                                @foreach (var platform in game.Platforms.Values)
-                                                {
-                                                    <small class="d-inline-block mb-0 text-muted">@platform.Name /</small>
-                                                }
-                                            }
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -123,8 +125,8 @@
                     </li>
                 }
             }
-            </ul>
-        </div>
+        </ul>
+    </div>
     <div class="col-5 col-md-5 col-lg-7">
         <div class="container">
             <!-- Swiper 1: Genre - RPG -->

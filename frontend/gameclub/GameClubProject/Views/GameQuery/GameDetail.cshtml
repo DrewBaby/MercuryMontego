@@ -17,65 +17,7 @@
     </div>
 </div>
 
-@if (Model.Videos != null)
-{
-    <div>
-        <div>
-            @foreach (var video in Model.Videos.Values)
-            {
-
-                <div class="ml-2 mt-2 gameDescription">
-
-                    <h6 class="mb-0">@Model.Name</h6>
-                    <small class="mb-0 d-block releaseDate ml-1">@Model.ReleaseDates.ToString().Substring(0, 10)</small>
-                    @if (Model.Rating == 0)
-                    {
-                        <small class="text-muted d-block mt-3">Rating Unavailable</small>
-                    }
-                    else
-                    {
-                        <div class="stars-outer d-block mt-2">
-                            <div class="stars-inner " style="width: @Model.Rating.ToString()px;"></div>
-                        </div>
-                    }
-
-                    @if (Model.Platforms == null)
-                    {
-                        <small class="d-inline-block mb-0 text-muted">Platforms unavailable</small>
-                    }
-                    else
-                    {
-                        @foreach (var platform in Model.Platforms.Values)
-                        {
-                            <small class="d-inline-block mb-0 text-muted">@platform.Name /</small>
-                        }
-                    }
-
-                </div>
-            }
-        </div>
-        <!-- Add Pagination -->
-    </div>
-}
-else
-{
-    <div class="BigUnavailbleImageSection mt-4">
-        <img src="~/images/video-unavailable.jpg" alt="game picture" srcset="" class="rounded ">
-    </div>
-}
-
 <div class="ml-5 mr-5 GameBio">
-    <div class="gameCover d-inline-block">
-        @if (Model.Cover != null)
-        {
-            <img src="//images.igdb.com/igdb/image/upload/t_cover_big/@Model.Cover.Value.ImageId@Html.Raw(".jpg")" alt="game picture" srcset="" class="rounded">
-        }
-        else
-        {
-            <img src="~/images/small_unavailable-image.png" alt="game picture" srcset="" class="rounded">
-        }
-    </div>
-
     <div class="container game-detail">
         <div class="row">
             <div class="col col-3">
@@ -83,37 +25,44 @@ else
             </div>
             <div class="col col-9">
                 <p>
-                Release Date: @if (Model.ReleaseDates != null)
-                {
-                    @Model.ReleaseDates.ToString().Substring(0, 10)
-                }      
-                else                 
-                {
-                    <small class="text-muted d-block mt-3">Unavailable</small>
-                } |
-                    @if (Model.Platforms != null)
+                    Release Date: @if (Model.release_date != null)
                     {
-                    foreach (var platform in Model.Platforms.Values)
-                    {
-                        <small class="d-inline-block mb-0 text-muted">@platform.Name /</small>
-                    }
+                        @Model.release_date.ToString("MMMM dd, yyyy")
                     }
                     else
                     {
-                    <small class="text-muted d-block mt-3">Platforms Unavailable</small>
+                        <small class="text-muted mt-3">Unavailable</small>
                     } |
-                    <small>Score: @Model.Rating.Value.ToString().Substring(0, 2)</small>
+                    @if (Model.Platforms != null)
+                    {
+                        foreach (var platform in Model.Platforms.Values)
+                        {
+                            <small class="d-inline-block mb-0 text-muted">@platform.Name /</small>
+                        }
+                    }
+                    else
+                    {
+                        <small class="text-muted mt-3">Platforms Unavailable</small>
+                    } |
+                    @if (Model.Rating != null)
+                    {
+                        <small>Score: @Model.Rating.Value.ToString().Substring(0, 2)</small>
+                    }
+                    else
+                    {
+                        <small class="text-muted mt-3">Rating Unavailable</small>
+                    }
                 </p>
             </div>
             <div class="col col-3">
                 <div id="cover-image-name">
                     @if (Model.Cover != null)
                     {
-                        <img src="@Html.DisplayFor(modelItem => Model.Cover.Value.Url)" class="card-img-top" alt="@Html.DisplayFor(modelItem => Model.Name)">
+                        <img src="//images.igdb.com/igdb/image/upload/t_cover_big/@Model.Cover.Value.ImageId@Html.Raw(".jpg")" class="card-img-top" alt="@Model.Name)">
                     }
                     else
                     {
-                        <img src="~/images/big_unvailable-image.jpg" class="card-img-top" alt="@Html.DisplayFor(modelItem => Model.Name)">
+                        <img src="~/images/big_unvailable-image.jpg" class="card-img-top" alt="@Model.Name)">
                     }
                 </div>
             </div>
@@ -134,7 +83,7 @@ else
                     @foreach (var items in Model.Screenshots.Values)
                     {
                         <div class="swiper-slide" id="swiper-slide">
-                            <img src="@Html.DisplayFor(modelItem => items.Url)" class="card-img-top" alt="@Html.DisplayFor(modelItem => items.Game.Value.Name)">
+                            <img src="//images.igdb.com/igdb/image/upload/t_cover_big/@items.ImageId@Html.Raw(".jpg")" class="card-img-top" alt="@Html.DisplayFor(modelItem => items.Game.Value.Name)">
                         </div>
                     }
                 </div>
@@ -195,8 +144,8 @@ else
                         <form action="~/addReview" method="post">
                             <div class="form-group">
                                 @*<textarea asp-for="formReview.text" placeholder="place a review ..." class="form-control p-2" cols="30" rows="3"></textarea>
-                                <input type="hidden" asp-for="formReview.gameId" value="@Model.game.Id">
-                                <small class="d-block"><span asp-validation-for="formReview.text" class="text-danger font-weight-bold"></span></small>*@
+                                    <input type="hidden" asp-for="formReview.gameId" value="@Model.game.Id">
+                                    <small class="d-block"><span asp-validation-for="formReview.text" class="text-danger font-weight-bold"></span></small>*@
                                 <div class="text-right mt-2"><button type="submit" class="btn btn-outline-danger">Post</button></div>
                             </div>
                         </form>
@@ -214,8 +163,8 @@ else
                     <div class="swiper-wrapper pb-5">
                         @foreach (var item in Model.Artworks.Values)
                         {
-                            <div class="swiper-slide" id="swiper-slide">
-                                <img src="@Html.DisplayFor(modelItem => item.Url)" class="card-img-top" alt="@Html.DisplayFor(modelItem => item.Game.Value.Name)">
+                            <div class="swiper-slide" id="swiper-slide" style="max-height: 250px;">
+                                <img style="max-height:inherit;" src="//images.igdb.com/igdb/image/upload/t_cover_big/@item.ImageId@Html.Raw(".jpg")" class="card-img-top" alt="@Html.DisplayFor(modelItem => item.Game.Value.Name)">
                             </div>
                         }
                     </div>
@@ -226,15 +175,14 @@ else
             {
                 <small class="text-muted d-block mt-3">Artwork Unavailable</small>
             }
-    </div>
+        </div>
 
     </div>
 </div>
 
 
-              
-            
 
 
 
- 
+
+
