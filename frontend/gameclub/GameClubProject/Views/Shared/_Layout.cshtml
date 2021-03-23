@@ -5,19 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - GameClubProject</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
-    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/css/swiper.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    
+    @*  Andrew Lawson -  Commenting this section out for Merger project.    03/22/2021
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/GCDashboard.css" asp-append-version="true" />
+    *@
     <script src="https://apis.google.com/js/platform.js" async defer  asp-append-version="true"></script>
     @*<link rel="stylesheet" href="~/css/GCProfile.css" />*@
+    @await RenderSectionAsync("Styles", required: false)
+    
 
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="GameQuery" asp-action="Home">Game Club Project</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -41,13 +45,25 @@
                     <partial name="_LoginPartial.cshtml">
 
                 </div>
+                <form action="~/GameSearch" method="post" class=" searchDiv col-6 text-center ml-5">
+                    <div class="container flex-nowrap">
+                        <div class="row">
+                            <div class="col-9 text-right">
+                                <input class="form-control mr-2 col-7 ml-5" type="text" name="gameName" placeholder="Search games..">
+                            </div>
+                            <div class="col-3 text-left">
+                                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
 
             </div>
         </nav>
     </header>
 
     <div class="container-fluid">
-        <div class="row flex-nowrap">
+        <div class="row flex-nowrap" style="max-width: inherit;">
             <div class="col-1 collapse show d-md-flex bg-light pt-2 pl-0 box-shadow border-right min-vh-100" id="sidebar" style="max-width:250px;">
                 <ul class="nav flex-column flex-nowrap overflow-hidden">
                     <li class="nav-item">
@@ -69,10 +85,7 @@
                         <a class="nav-link text-truncate text-dark" asp-area="" asp-controller="GameQuery" asp-action="About"><i class="bi bi-info-circle-fill"></i> About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-truncate text-dark" asp-area="" asp-controller="Home" asp-action="Privacy"><i class="bi bi-shield-lock-fill"></i> Privacy</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-truncate text-dark" asp-area="" asp-controller="GameQuery" asp-action="Index">NewHomePage</a>
+                        <a class="nav-link text-truncate text-dark" asp-area="" asp-controller="GameQuery" asp-action="Privacy"><i class="bi bi-shield-lock-fill"></i> Privacy</a>
                     </li>
                 </ul>
             </div>
@@ -98,7 +111,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - GameClubProject - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2021 - GameClubProject - <a asp-area="" asp-controller="GameQuery" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
 

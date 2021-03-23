@@ -190,6 +190,16 @@
         swiper.autoplay.start();
     });
 
+    // Slides to showcase games by genre
+    var swiper = new Swiper('.swiper2', {
+        slidesPerView: 5,
+        spaceBetween: 30,
+        pagination: {
+            el: '.swiper-pagination2',
+            clickable: true,
+        },
+    });
+
 
 
     // Game Reviewed Sliders CoverEffect in User Profile

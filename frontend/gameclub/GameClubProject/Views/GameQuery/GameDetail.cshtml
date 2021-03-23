@@ -1,10 +1,22 @@
 ﻿@model Game
+@section Styles{
+    <link rel="stylesheet" href="~/css/GCGameDetail.css" />
+}
 
+@section Scripts{
+    <script src="~/js/GCGameDetail.js"></script>
+}
 
 <title>@Model.Name</title>
-<div class="text-left ml-5 mt-3">
-    <a href="~/" class="btn btn-dark ">Back</a>
+<div class="row flex-nowrap m-3">
+    <div class="col text-left p-0">
+        <a class="btn btn-dark" asp-area="" asp-controller="" asp-action=""><i class="bi bi-house-fill"></i> Add to favorites</a>
+    </div>
+    <div class="col text-right p-0">
+        <a class="btn btn-dark" asp-area="" asp-controller="" asp-action=""><i class="bi bi-house-fill"></i> Read/Write reviews!</a>
+    </div>
 </div>
+
 @if (Model.Videos != null)
 {
     <div>
@@ -85,57 +97,114 @@ else
                 @foreach (var item in Model.Genres.Values)
                 {
                     <span class="font-weight-light text-warning mr-1">@item.Name </span>
+<div class="container game-detail">
+    <div class="row">
+        <div class="col col-3">
+            <h5 class="text-center">@Html.DisplayFor(item => Model.Name)</h5>
+        </div>
+        <div class="col col-9">
+            <p>
+                Release Date: @if (Model.FirstReleaseDate != null)
+                {
+                    @Model.FirstReleaseDate.ToString().Substring(0, 10)
                 }
             </small>
             <small class="ml-2 mb-1 font-weight-bold text-secondary d-block">
                 Platforms:
                 @foreach (var item in Model.Platforms.Values)
                 {
-                    <span class="font-weight-light text-warning">@item.Name</span>
+                    <small class="text-muted d-block mt-3">Unavailable</small>
+                } |
+
+                @if (Model.Platforms != null)
+                {
+                    foreach (var platform in Model.Platforms.Values)
+                    {
+                        <small class="d-inline-block mb-0 text-muted">@platform.Name /</small>
+                    }
                 }
-            </small>
-            <p class="mt-2 ml-3 summary">@Model.Summary</p>
+                else
+                {
+                        <small class="text-muted d-block mt-3">Platforms Unavailable</small>
+                } |
+                <small>Score: @Model.Rating.Value.ToString().Substring(0, 2)</small>
+            </p>
+        </div>
+        <div class="col col-3">
+            <div id="cover-image-name">
+                @if (Model.Cover != null)
+                {
+                    <img src="@Html.DisplayFor(modelItem => Model.game.Cover.Value.Url)" class="card-img-top" alt="@Html.DisplayFor(modelItem => Model.game.Name)">
+                }
+                else
+                {
+                    <img src="~/images/big_unvailable-image.jpg" class="card-img-top" alt="@Html.DisplayFor(modelItem => Model.game.Name)">
+                }
+            </div>
+        </div>
+        <div class="col col-9">
+            <div id="game-summary">
+                <h5>Summary</h5>
+                <p>@Html.DisplayFor(item => Model.Summary)</p>
+            </div>
         </div>
     </div>
-    <div class="ratingSection d-inline-block mt-4">
-        @if (Model.Rating == 0 || Model.Rating == null)
+
+    <div class="row my-3">
+        @if (Model.game.Screenshots != null)
         {
-            <svg class="radial-progress" viewBox="0 0 80 80">
-                <circle class="incomplete" cx="40" cy="40" r="35"></circle>
-                <circle class="complete" cx="40" cy="40" r="35" style="stroke-dashoffset: 39.58;"></circle>
-                <text class="percentage" x="50%" y="57%" transform="matrix(0, 1, -1, 0, 80, 0)">No Rating</text>
-            </svg>
-
-        }
-        else
-        {
-            <svg class="radial-progress" data-percentage="@Model.Rating.ToString()" viewBox="0 0 80 80">
-                <circle class="incomplete" cx="40" cy="40" r="35"></circle>
-                <circle class="complete" cx="40" cy="40" r="35" style="stroke-dashoffset: 39.58;"></circle>
-                <text class="percentage" x="50%" y="57%" transform="matrix(0, 1, -1, 0, 80, 0)">@Model.Rating.ToString()%</text>
-                <text class="ratingtext" x="50%" y="70%" transform="matrix(0, 1, -1, 0, 80, 0)">rating</text>
-            </svg>
-        }
-
-    </div>
-    <div class="expansionSection mt-3">
-
-        @if (@Model.SimilarGames.Values.Length > 1)
-        {
-            <h2 class="font-weight-bold text-center bg-dark text-white py-1 pr-2 pl-2 mb-3">Similar Games</h2>
-            <div class="ExpansionSwiper-container">
-                <div class="swiper-wrapper">
-
-                    @foreach (var expansion in Model.SimilarGames.Values)
+            <div class="swiper-container">
+                <div class="swiper-wrapper pb-5">
+                    @foreach (var item in Model.Screenshots.Values)
                     {
-                        <div class="swiper-slide">
-                            <a href="~/ShowGame/@expansion.Id"><img src="//images.igdb.com/igdb/image/upload/t_cover_big/@expansion.Cover.Value.ImageId@Html.Raw(".jpg")" alt="game picture" srcset="" class="screenshot rounded"></a>
+                        <div class="swiper-slide" id="swiper-slide">
+                            <img src="@Html.DisplayFor(modelItem => item.Url)" class="card-img-top" alt="@Html.DisplayFor(modelItem => item.Game.Value.Name)">
                         </div>
                     }
                 </div>
-                <div class="mt-5"></div>
-                <!-- Add Pagination -->
-                <div class="ExpansionSwiper-pagination"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        }
+        else
+        {
+            <div class="BigUnavailbleImageSection mt-4">
+                <img src="~/images/video-unavailable.jpg" alt="game picture" srcset="" class="rounded ">
+            </div>
+        }
+    </div>
+
+    <div class="row my-2">
+        <h5>Storyline</h5>
+        @if (Model.Storyline != null)
+        {
+            <p>@Model.Storyline</p>
+        }
+        else
+        {
+            <p>Oh no! No storyline available from IGDB.</p>
+        }
+    </div>
+
+    <div class="row my-2 text-center">
+        @if (Model.Videos != null)
+        {
+            @foreach (var video in Model.Videos.Values)
+            {
+                <div class="col-md-12 col-lg-6">
+                    <div class="videoHolder m-2" preload="auto">
+                        <iframe id="vjs_video_2128_Youtube_api"
+                                class="vjs-tech" frameborder="0" allowfullscreen="1"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                title="YouTube video player" width="426" height="240"
+                                src="https://www.youtube.com/embed/@video.VideoId?controls=0&amp;modestbranding=1&amp;rel=0&amp;showinfo=0&amp;loop=0&amp;fs=0&amp;hl=en&amp;iv_load_policy=3&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fwww.igdb.com&amp;widgetid=1"></iframe>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="BigUnavailbleImageSection">
+                <img src="~/images/video-unavailable.jpg" alt="game picture" srcset="" class="rounded ">
             </div>
         }
     </div>
@@ -154,17 +223,41 @@ else
                                 <small class="d-block"><span asp-validation-for="formReview.text" class="text-danger font-weight-bold"></span></small>*@
                                 <div class="text-right mt-2"><button type="submit" class="btn btn-outline-danger">Post</button></div>
                             </div>
-
                         </form>
                     </div>
-                    <hr>
-                    <div class="ListOfReviews">
-                    </div>
-
                 </div>
             </div>
-
-
         </div>
+        <hr>
+
+        <div class="row my-3">
+            <h5>Fan Art</h5>
+            @if (Model.game.Artworks != null)
+            {
+                <div class="swiper-container">
+                    <div class="swiper-wrapper pb-5">
+                        @foreach (var item in Model.game.Artworks.Values)
+                        {
+                            <div class="swiper-slide" id="swiper-slide">
+                                <img src="@Html.DisplayFor(modelItem => item.Url)" class="card-img-top" alt="@Html.DisplayFor(modelItem => item.Game.Value.Name)">
+                            </div>
+                        }
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            }
+            else
+            {
+                <small class="text-muted d-block mt-3">Artwork Unavailable</small>
+            }
+    </div>
+</div>
+
+
+              
+            
+
+
+
     </div>
 </div>
