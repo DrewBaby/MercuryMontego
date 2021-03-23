@@ -226,14 +226,14 @@ namespace GameClubProject.Controllers
             {
                 foreach (var platform in game.platforms)
                 {
-                    if (_dbContext.VideoGamePlatforms.All(p => p.PKey != platform.platform_id))
-                    {
-                        _dbContext.VideoGamePlatforms.Add(platform);
-                    }
-                    var gamePlatform = new GamePlatforms();
-                    gamePlatform.gameId = game.gameId;
-                    gamePlatform.platform_id = platform.platform_id;
-                    _dbContext.VideoGamePlatforms.Add(gamePlatform);
+                    //if (_dbContext.VideoGamePlatforms.All(p => p.PKey != platform.platform_id))
+                    //{
+                    //    _dbContext.VideoGamePlatforms.Add(platform);
+                    //}
+                    //var gamePlatform = new GamePlatforms();
+                    //gamePlatform.gameId = game.gameId;
+                    //gamePlatform.platform_id = platform.platform_id;
+                    //_dbContext.VideoGamePlatforms.Add(gamePlatform);
 
 
                 }
