@@ -5,10 +5,8 @@
 <div class="text-left ml-5 mt-3">
     <a href="~/Home" class="btn btn-dark ">Back</a>
 </div>
-@if (Model.Videos.Values.Length > 0)
+@if (Model.Videos != null)
 {
-
-
     <div>
         <div>
             @foreach (var video in Model.Videos.Values)
