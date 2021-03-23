@@ -133,7 +133,7 @@ namespace GameClubProject.Models
         {
             var _api = new IGDB.IGDBClient(IGDB_CLIENT_ID, IGDB_CLIENT_SECRET);
             var query = $@"
-                fields genres.name,genres.slug,cover.url,cover.image_id,name,rating,first_release_date,platforms.name;
+                fields genres.name,genres.slug,cover.url,cover.image_id,name,rating,first_release_date,platforms.name,release_dates;
                 where rating>1;
                 search ""{name}"";
                 limit 20;";

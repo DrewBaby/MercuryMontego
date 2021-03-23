@@ -23,19 +23,11 @@
         <div>
             @foreach (var video in Model.Videos.Values)
             {
-                <div>
-                    <div class="videoHolder mt-5 ml-5 mr-5" preload="auto">
-                        <iframe id="vjs_video_2128_Youtube_api"
-                                class="vjs-tech" frameborder="0" allowfullscreen="1"
-                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                title="YouTube video player" width="640" height="360"
-                                src="https://www.youtube.com/embed/@video.VideoId?controls=0&amp;modestbranding=1&amp;rel=0&amp;showinfo=0&amp;loop=0&amp;fs=0&amp;hl=en&amp;iv_load_policy=3&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fwww.igdb.com&amp;widgetid=1"></iframe>
-                    </div>
-                </div>
+
                 <div class="ml-2 mt-2 gameDescription">
 
                     <h6 class="mb-0">@Model.Name</h6>
-                    <small class="mb-0 d-block releaseDate ml-1">@Model.release_date.ToString("MMMM dd, yyyy")</small>
+                    <small class="mb-0 d-block releaseDate ml-1">@Model.ReleaseDates.ToString().Substring(0, 10)</small>
                     @if (Model.Rating == 0)
                     {
                         <small class="text-muted d-block mt-3">Rating Unavailable</small>
@@ -91,9 +83,9 @@ else
             </div>
             <div class="col col-9">
                 <p>
-                Release Date: @if (Model.First_Release_Date != null)
+                Release Date: @if (Model.ReleaseDates != null)
                 {
-                    @Model.First_Release_Date.ToString().Substring(0, 10)
+                    @Model.ReleaseDates.ToString().Substring(0, 10)
                 }      
                 else                 
                 {

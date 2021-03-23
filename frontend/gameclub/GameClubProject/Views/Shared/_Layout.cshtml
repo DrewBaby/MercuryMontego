@@ -35,16 +35,13 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="GameQuery" asp-action="Privacy">Privacy</a>
                         </li>
                     </ul>
-
-                    @* Andrew lawson  - Commented out  as it is dupicated effort.   03/23/2020
-                        
+                    @* Andrew lawson  - Commented out  as it is dupicated effort.   03/23/2020                        
                         <div class="g-signin2" data-onsuccess="onSignIn"></div>
                     <form action="~/GameSearch" method="post" class=" searchDiv col-6 text-center ml-5">
                         <input class="form-control mr-2 col-7 ml-5" type="text" name="gameName" placeholder="Search games..">
                         <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
                     </form>*@
                     <partial name="_LoginPartial.cshtml">
-
                 </div>
                 <form action="~/GameSearch" method="post" class=" searchDiv col-6 text-center ml-5">
                     <div class="container flex-nowrap">
@@ -58,7 +55,6 @@
                         </div>
                     </div>
                 </form>
-
             </div>
         </nav>
     </header>

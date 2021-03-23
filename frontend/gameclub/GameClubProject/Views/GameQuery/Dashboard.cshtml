@@ -86,9 +86,9 @@
                                 <div class="col-6 col-sm-6 col-md-8 col-lg-8">
                                     <div class="d-inline-block ml-2 mt-2 gameDescription overflow-text">
                                         <a href="~/ShowGame/@game.Id"><h6 class="mb-0">@game.Name</h6></a>
-                                            @if (game.First_Release_Date != null)
+                                            @if (game.ReleaseDates != null)
                                             {
-                                                <small class="mb-0 d-block releaseDate ml-1">@game.First_Release_Date.ToString().Substring(0, 10)</small>
+                                                <small class="mb-0 d-block releaseDate ml-1">@game.ReleaseDates.ToString().Substring(0, 10)</small>
                                             }
                                             else
                                             {
