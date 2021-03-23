@@ -8,7 +8,7 @@ namespace IGDB.Models
     public string AlternativeName { get; set; }
     public PlatformCategory Category { get; set; }
     public string Checksum { get; set; }
-    public DateTimeOffset? CreatedAt { get; set; }
+    public DateTimeOffset? Created_At { get; set; }
     public int? Generation { get; set; }
     public long? Id { get; set; }
     public string Name { get; set; }
@@ -16,7 +16,7 @@ namespace IGDB.Models
     public IdentityOrValue<PlatformLogo> PlatformLogo { get; set; }
     public string Slug { get; set; }
     public string Summary { get; set; }
-    public DateTimeOffset? UpdatedAt { get; set; }
+    public DateTimeOffset? Updated_At { get; set; }
     public string Url { get; set; }
     public IdentitiesOrValues<PlatformVersion> Versions { get; set; }
     public IdentitiesOrValues<PlatformWebsite> Websites { get; set; }

@@ -9,7 +9,7 @@ namespace IGDB.Models
     
     public IdentitiesOrValues<Company> Companies { get; set; }
 
-    public DateTimeOffset? CreatedAt { get; set; }
+    public DateTimeOffset? Created_At { get; set; }
 
     public string Description { get; set; }
     public IdentityOrValue<GameEngineLogo> Logo { get; set; }
@@ -21,7 +21,7 @@ namespace IGDB.Models
 
     public string Slug { get; set; }
 
-    public DateTimeOffset? UpdatedAt { get; set; }
+    public DateTimeOffset? Updated_At { get; set; }
     public string Url { get; set; }
   }
 }

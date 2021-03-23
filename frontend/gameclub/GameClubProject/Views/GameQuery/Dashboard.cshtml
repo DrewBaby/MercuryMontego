@@ -1,4 +1,4 @@
-﻿
+﻿ 
 @model DashboardGameBundle
 
 <h1 class="font-weight-bold text-center mt-5 popularGameText">Popular <span class="gameText">Games</span> </h1>
@@ -30,59 +30,94 @@
 
 <hr>
 <div class="container">
-    <ul class="list-inline">
-        @if (Model.games == null)
-        {
-            <h4 class="font-weight-light mt-5 bg-danger text-white text-center py-3">No Games Found!!</h4>
-        }
-        else
-        {
-            @foreach (var game in Model.games)
-            {
-                <li class="font-weight-light mb-3 game">
 
-                    @if (game.Cover == null)
-                    {
-                        <img src="~/images/small_unavailable-image.png" alt="game picture" srcset="" class="gamePic rounded">
-                    }
-                    else
-                    {
-                        <img src="//images.igdb.com/igdb/image/upload/t_cover_big/@game.Cover.Value.ImageId@Html.Raw(".jpg")" alt="game picture" srcset="" class="gamePic rounded">
-                    }
-                    <div class="d-inline-block ml-2 mt-2 gameDescription">
-
-                        <a href="~/ShowGame/@game.Id"><h6 class="mb-0">@game.Name</h6></a>
-                        <small class="mb-0 d-block releaseDate ml-1">@game.release_date.ToString("MMMM dd, yyyy")</small>
-                        @if (game.Rating == 0)
-                        {
-                            <small class="text-muted d-block mt-3">Rating Unavailable</small>
-                        }
-                        else
-                        {
-                            <div class="stars-outer d-block mt-2">
-                                <div class="stars-inner " style="width: @game.Rating.ToString()px;"></div>
-                            </div>
-                        }
-
-                        @if (game.Platforms == null)
-                        {
-                            <small class="d-inline-block mb-0 text-muted">Platforms unavailable</small>
-                        }
-                        else
-                        {
-                            @foreach (var platform in game.Platforms.Values)
-                            {
-                                <small class="d-inline-block mb-0 text-muted">@platform.Name /</small>
-                            }
-                        }
-
-
+    <div class="mt-2 mb-3 filterBox">
+        <div class="filtersTitle">
+            <a href="~/fetchGenres" data-requested="no" class="genres">Genres</a>
+            <a href="#" data-requested="no" class="rating">Rating</a>
+            <a href="~/fetchPlatforms" data-requested="no" class="platforms">Platform</a>
+        </div>
+        <div class="mt-2 Genresfilters filters"></div>
+        <div class="mt-2 Ratingfilters filters">
+            <form action="~/GamesOnRating" method="post" class="mt-4">
+                <div class="row">
+                    <div class="form-group col-3">
+                        <label asp-for="rating_form.MinRating" class="font-weight-bold"></label>
+                        <input asp-for="rating_form.MinRating" class="form-control" placeholder="1" value=@ViewBag.MinRating>
                     </div>
 
-                </li>
+                    <div class="form group col-6">
+                        <label asp-for="rating_form.MaxRating" class="font-weight-bold"></label>
+                        <div class="form-inline">
+                            <input asp-for="rating_form.MaxRating" class="form-control" placeholder="100" value=@ViewBag.MaxRating>
+                            <button type="submit" class="btn btn-outline-danger ml-3 d-inline">Search</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <small class="text-muted"> Rating should be between 1 - 100</small>
+            </form>
+        </div>
+        <div class="mt-2 Platformsfilters filters"></div>
+    </div>
+
+    <div class="mt-4">
+        <ul class="list-inline">
+            @if (Model.games == null)
+            {
+                <h4 class="font-weight-light mt-5 bg-danger text-white text-center py-3">No Games Found!!</h4>
             }
-        }
-    </ul>
+            else
+            {
+                @foreach (var game in Model.games)
+                {
+                    <li class="font-weight-light mb-3 game">
+
+                        @if (game.Cover == null)
+                        {
+                            <img src="~/images/small_unavailable-image.png" alt="game picture" srcset="" class="gamePic rounded">
+                        }
+                        else
+                        {
+                            <img src="//images.igdb.com/igdb/image/upload/t_cover_big/@game.Cover.Value.ImageId@Html.Raw(".jpg")" alt="game picture" srcset="" class="gamePic rounded">
+                        }
+                        <div class="d-inline-block ml-2 mt-2 gameDescription">
+
+                            <a href="~/ShowGame/@game.Id"><h6 class="mb-0">@game.Name</h6></a>
+                            <small class="mb-0 d-block releaseDate ml-1">@game.release_date.ToString("MMMM dd, yyyy")</small>
+                            @if (game.Rating == 0)
+                            {
+                                <small class="text-muted d-block mt-3">Rating Unavailable</small>
+                            }
+                            else
+                            {
+                                <div class="stars-outer d-block mt-2">
+                                    <div class="stars-inner " style="width: @game.Rating.ToString()px;"></div>
+                                </div>
+                            }
+
+                            @if (game.Platforms == null)
+                            {
+                                <small class="d-inline-block mb-0 text-muted">Platforms unavailable</small>
+                            }
+                            else
+                            {
+                                @foreach (var platform in game.Platforms.Values)
+                                {
+                                    <small class="d-inline-block mb-0 text-muted">@platform.Name /</small>
+                                }
+                            }
+
+
+                        </div>
+
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+
 
 </div>
 

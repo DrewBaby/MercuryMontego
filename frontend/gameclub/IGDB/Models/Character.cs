@@ -7,7 +7,7 @@ namespace IGDB.Models
     public string[] Akas { get; set; }
     public string Checksum { get; set; }
     public string CountryName { get; set; }
-    public DateTimeOffset? CreatedAt { get; set; }
+    public DateTimeOffset? Created_At { get; set; }
     public string Description { get; set; }
     public IdentitiesOrValues<Game> Games { get; set; }
     public Gender? Gender { get; set; }
@@ -16,7 +16,7 @@ namespace IGDB.Models
     public string Name { get; set; }
     public string Slug { get; set; }
     public Species? Species { get; set; }
-    public DateTimeOffset? UpdatedAt { get; set; }
+    public DateTimeOffset? Updated_At { get; set; }
     public string Url { get; set; }
   }
 

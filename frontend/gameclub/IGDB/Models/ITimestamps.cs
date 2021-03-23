@@ -4,7 +4,7 @@ namespace IGDB.Models
 {
   public interface ITimestamps
   {
-    DateTimeOffset? CreatedAt { get; set; }
-    DateTimeOffset? UpdatedAt { get; set; }
+    DateTimeOffset? Created_At { get; set; }
+    DateTimeOffset? Updated_At { get; set; }
   }
 }

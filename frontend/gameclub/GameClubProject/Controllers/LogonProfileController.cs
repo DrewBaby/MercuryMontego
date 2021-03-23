@@ -20,12 +20,12 @@ namespace GameClubProject.Controllers
     public class LogonProfileController : Controller
     {
 
-        private readonly GameclubDBContext _context;
+        private readonly GameclubDBContext _dbContext;
         private readonly  IGameClubData _gameClubData = null;
 
         public LogonProfileController(IGameClubData gameClubData, GameclubDBContext context)
         {
-            _context = context;
+            _dbContext = context;
             _gameClubData = gameClubData;
         }
 
@@ -34,8 +34,8 @@ namespace GameClubProject.Controllers
             return HtmlEncoder.Default.Encode($"Hello {name}, NumTimes is: {numTimes}");
         }
         
-        [HttpGet]
-        [AllowAnonymous]
+        
+        [HttpGet,AllowAnonymous]
         public IActionResult UserProfile(string returnUrl = null)
         {
             if (Url.IsLocalUrl(returnUrl))
@@ -44,6 +44,7 @@ namespace GameClubProject.Controllers
                 return RedirectToAction("Home", "GameQuery");
         }
 
+        //[Route("login")]
         public IActionResult login()
         {
             var properties = new AuthenticationProperties { RedirectUri = Url.Action("GoogleResponse") };
@@ -64,7 +65,7 @@ namespace GameClubProject.Controllers
             //}
 
             List<MembershipStatus> msList = new List<MembershipStatus>();
-            msList=(from c in _context.MembershipStatuses select c).ToList();
+            msList=(from c in _dbContext.MembershipStatuses select c).ToList();
             //msList.Insert(0,new MembershipStatus)
             ViewBag.MembershipStatusId = msList;
             ViewBag.IsSuccess = isSuccess;
@@ -175,83 +176,6 @@ namespace GameClubProject.Controllers
         {
             return View();
         }
-        //public async Task<IActionResult> OnPostConfirmationAsync(string returnUrl = null)
-        //{
-        //    returnUrl = returnUrl ?? Url.Content("~/");
-        //    // Get the information about the user from the external login provider
-        //    var info = await _signInManager.GetExternalLoginInfoAsync();
-
-        //    if (info == null)
-        //    {
-        //        ErrorMessage =
-        //            "Error loading external login information during confirmation.";
-
-        //        return RedirectToPage("./Login", new { ReturnUrl = returnUrl });
-        //    }
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        var user = new IdentityUser
-        //        {
-        //            UserName = Input.Email,
-        //            Email = Input.Email
-        //        };
-
-        //        var result = await _userManager.CreateAsync(user);
-
-        //        if (result.Succeeded)
-        //        {
-        //            result = await _userManager.AddLoginAsync(user, info);
-
-        //            if (result.Succeeded)
-        //            {
-        //                // If they exist, add claims to the user for:
-        //                //    Given (first) name
-        //                //    Locale
-        //                //    Picture
-        //                if (info.Principal.HasClaim(c => c.Type == ClaimTypes.GivenName))
-        //                {
-        //                    await _userManager.AddClaimAsync(user,
-        //                        info.Principal.FindFirst(ClaimTypes.GivenName));
-        //                }
-
-        //                if (info.Principal.HasClaim(c => c.Type == "urn:google:locale"))
-        //                {
-        //                    await _userManager.AddClaimAsync(user,
-        //                        info.Principal.FindFirst("urn:google:locale"));
-        //                }
-
-        //                if (info.Principal.HasClaim(c => c.Type == "urn:google:picture"))
-        //                {
-        //                    await _userManager.AddClaimAsync(user,
-        //                        info.Principal.FindFirst("urn:google:picture"));
-        //                }
-
-        //                // Include the access token in the properties
-        //                var props = new AuthenticationProperties();
-        //                props.StoreTokens(info.AuthenticationTokens);
-        //                props.IsPersistent = true;
-
-        //                await _signInManager.SignInAsync(user, props);
-
-        //                _logger.LogInformation(
-        //                    "User created an account using {Name} provider.",
-        //                    info.LoginProvider);
-
-        //                return LocalRedirect(returnUrl);
-        //            }
-        //        }
-
-        //        foreach (var error in result.Errors)
-        //        {
-        //            ModelState.AddModelError(string.Empty, error.Description);
-        //        }
-        //    }
-
-        //    LoginProvider = info.LoginProvider;
-        //    ReturnUrl = returnUrl;
-        //    return Page();
-        //}
     }
 }
 

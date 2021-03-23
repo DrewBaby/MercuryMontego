@@ -27,7 +27,7 @@ namespace IGDB.Models
 
     public IdentityOrValue<Cover> Cover { get; set; }
 
-    public DateTimeOffset? CreatedAt { get; set; }
+    public DateTimeOffset? Created_At { get; set; }
 
     public IdentitiesOrValues<Game> Dlcs { get; set; }
 
@@ -35,7 +35,7 @@ namespace IGDB.Models
 
     public IdentitiesOrValues<ExternalGame> ExternalGames { get; set; }
 
-    public DateTimeOffset? FirstReleaseDate { get; set; }
+    public double First_Release_Date { get; set; }
 
     public int? Follows { get; set; }
 
@@ -96,7 +96,7 @@ namespace IGDB.Models
 
     public int? TotalRatingCount { get; set; }
 
-    public DateTimeOffset? UpdatedAt { get; set; }
+    public DateTimeOffset? Updated_At { get; set; }
 
     public string Url { get; set; }
 
@@ -108,10 +108,15 @@ namespace IGDB.Models
 
         public IdentitiesOrValues<GameVideo> Videos { get; set; }
 
-    public IdentitiesOrValues<Website> Websites { get; set; }
-  }
+    public IdentitiesOrValues<Website> Websites { get; set; }    
+    
+    }
 
-  public enum Category
+
+
+    
+
+    public enum Category
   {
     MainGame = 0,
     DlcAddon = 1,

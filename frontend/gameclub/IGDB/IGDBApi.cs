@@ -73,6 +73,7 @@ namespace IGDB
             {
                 throw new ArgumentNullException(nameof(tokenStore),
                   "A ITokenStore is required. Pass InMemoryTokenStore if you do not have a custom store implemented.");
+                
             }
 
             _tokenManager = new TokenManager(tokenStore, new TwitchOAuthClient(clientId, clientSecret));

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace GameClubProject.Models
 {
-    public class Platform
+    public class Platform : VideoGamePlatform
     {
         [JsonProperty(PropertyName = "id")]
         [Key]

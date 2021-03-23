@@ -99,8 +99,8 @@ namespace IGDB.xTest
 
             var game = games[0];
 
-            Assert.NotNull(game.CreatedAt);
-            Assert.True(game.CreatedAt.Value.Year > 1970);
+            Assert.NotNull(game.Created_At);
+            Assert.True(game.Created_At.Value.Year > 1970);
         }
     }
 }

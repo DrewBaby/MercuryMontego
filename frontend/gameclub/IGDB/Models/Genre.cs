@@ -6,9 +6,9 @@ namespace IGDB.Models
   {
     public string Checksum { get; set; }
     
-    public DateTimeOffset? CreatedAt { get; set; }
+    public DateTimeOffset? Created_At { get; set; }
 
-    public DateTimeOffset? UpdatedAt { get; set; }
+    public DateTimeOffset? Updated_At { get; set; }
     public long? Id { get; set; }
 
     public string Name { get; set; }

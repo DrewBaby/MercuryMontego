@@ -9,10 +9,10 @@ namespace GameClubProject.Data
 {
     public class GameclubRepository : IGameClubData
     {
-        private readonly GameclubDBContext _context = null;        
+        private readonly GameclubDBContext _dbContext = null;        
         public GameclubRepository (GameclubDBContext context)
         {
-            _context = context;
+            _dbContext = context;
         }
 
         public async Task<int> AddRegisteredUser (UserAccount user)
@@ -32,14 +32,14 @@ namespace GameClubProject.Data
                 AddressZipCode = user.AddressZipCode,
                 CreatedAt = BitConverter.GetBytes(DateTime.UtcNow.Ticks)
             };  
-            await _context.UserAccounts.AddAsync(newUser);
-            await _context.SaveChangesAsync();
+            await _dbContext.UserAccounts.AddAsync(newUser);
+            await _dbContext.SaveChangesAsync();
             return newUser.PKey;
         }
         
         public async Task<List<UserAccount>> GetRegisteredUserByIdAsync(string userid)
         {
-            return await _context.UserAccounts.Where(o => o.UserId == userid)
+            return await _dbContext.UserAccounts.Where(o => o.UserId == userid)
                   .Select(user => new UserAccount()
                   {
                       UserName = user.UserName,
@@ -56,6 +56,9 @@ namespace GameClubProject.Data
                   //}).FirstOrDefaultAsync();
                   }).ToListAsync();
         }
+
+
+
 
     }
 

@@ -1,62 +1,64 @@
-﻿@model GamePageDetail
-<title>@Model.game.Name</title>
+﻿@model Game
+
+
+<title>@Model.Name</title>
 <div class="text-left ml-5 mt-3">
     <a href="~/Home" class="btn btn-dark ">Back</a>
 </div>
-@if (Model.game.Videos.Values.Length > 0)
+@if (Model.Videos.Values.Length > 0)
 {
 
 
-<div>
     <div>
-        @foreach (var video in Model.game.Videos.Values)
-        {
-            <div>
-                <div class="videoHolder mt-5 ml-5 mr-5" preload="auto">
-                    <iframe id="vjs_video_2128_Youtube_api"
-                            class="vjs-tech" frameborder="0" allowfullscreen="1"
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            title="YouTube video player" width="640" height="360"
-                            src="https://www.youtube.com/embed/@video.VideoId?controls=0&amp;modestbranding=1&amp;rel=0&amp;showinfo=0&amp;loop=0&amp;fs=0&amp;hl=en&amp;iv_load_policy=3&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fwww.igdb.com&amp;widgetid=1"></iframe>
-                </div>
-            </div>
-            <div class="ml-2 mt-2 gameDescription">
-
-                <h6 class="mb-0">@Model.game.Name</h6>
-                <small class="mb-0 d-block releaseDate ml-1">@Model.game.release_date.ToString("MMMM dd, yyyy")</small>
-                @if (Model.game.Rating == 0)
-                {
-                    <small class="text-muted d-block mt-3">Rating Unavailable</small>
-                }
-                else
-                {
-                    <div class="stars-outer d-block mt-2">
-                        <div class="stars-inner " style="width: @Model.game.Rating.ToString()px;"></div>
+        <div>
+            @foreach (var video in Model.Videos.Values)
+            {
+                <div>
+                    <div class="videoHolder mt-5 ml-5 mr-5" preload="auto">
+                        <iframe id="vjs_video_2128_Youtube_api"
+                                class="vjs-tech" frameborder="0" allowfullscreen="1"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                title="YouTube video player" width="640" height="360"
+                                src="https://www.youtube.com/embed/@video.VideoId?controls=0&amp;modestbranding=1&amp;rel=0&amp;showinfo=0&amp;loop=0&amp;fs=0&amp;hl=en&amp;iv_load_policy=3&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fwww.igdb.com&amp;widgetid=1"></iframe>
                     </div>
-                }
+                </div>
+                <div class="ml-2 mt-2 gameDescription">
 
-                @if (Model.game.Platforms == null)
-                {
-                    <small class="d-inline-block mb-0 text-muted">Platforms unavailable</small>
-                }
-                else
-                {
-                    @foreach (var platform in Model.game.Platforms.Values)
+                    <h6 class="mb-0">@Model.Name</h6>
+                    <small class="mb-0 d-block releaseDate ml-1">@Model.release_date.ToString("MMMM dd, yyyy")</small>
+                    @if (Model.Rating == 0)
                     {
-                        <small class="d-inline-block mb-0 text-muted">@platform.Name /</small>
+                        <small class="text-muted d-block mt-3">Rating Unavailable</small>
                     }
-                }
+                    else
+                    {
+                        <div class="stars-outer d-block mt-2">
+                            <div class="stars-inner " style="width: @Model.Rating.ToString()px;"></div>
+                        </div>
+                    }
 
-            </div>
-        }
+                    @if (Model.Platforms == null)
+                    {
+                        <small class="d-inline-block mb-0 text-muted">Platforms unavailable</small>
+                    }
+                    else
+                    {
+                        @foreach (var platform in Model.Platforms.Values)
+                        {
+                            <small class="d-inline-block mb-0 text-muted">@platform.Name /</small>
+                        }
+                    }
+
+                </div>
+            }
+        </div>
+
+
+
+
+        <!-- Add Pagination -->
+
     </div>
-
-    
-
-
-    <!-- Add Pagination -->
-
-</div>
 }
 else
 {
@@ -64,3 +66,111 @@ else
         <img src="~/images/video-unavailable.jpg" alt="game picture" srcset="" class="rounded ">
     </div>
 }
+
+<div class="ml-5 mr-5 GameBio">
+
+    <div class="gameCover d-inline-block">
+        @if (Model.Cover != null)
+        {
+            <img src="//images.igdb.com/igdb/image/upload/t_cover_big/@Model.Cover.Value.ImageId@Html.Raw(".jpg")" alt="game picture" srcset="" class="rounded">
+
+        }
+        else
+        {
+            <img src="~/images/small_unavailable-image.png" alt="game picture" srcset="" class="rounded">
+        }
+    </div>
+    <div class="gameDetails d-inline-block col-6">
+        <div class="ml-3 mt-3">
+            <h2 class="text-light mb-0">@Model.Name</h2>
+            <small class="ml-2 mt-2 mb-1 font-weight-bold text-secondary d-block">
+                Release Dates:
+                <span class="font-weight-light text-warning">@Model.release_date.ToString("MMMM dd, yyyy")</span>
+            </small>
+            <small class="ml-2 mb-1 font-weight-bold text-secondary d-block">
+                Genres:
+                @foreach (var item in Model.Genres.Values)
+                {
+                    <span class="font-weight-light text-warning mr-1">@item.Name </span>
+                }
+            </small>
+            <small class="ml-2 mb-1 font-weight-bold text-secondary d-block">
+                Platforms:
+                @foreach (var item in Model.Platforms.Values)
+                {
+                    <span class="font-weight-light text-warning">@item.Name</span>
+                }
+            </small>
+            <p class="mt-2 ml-3 summary">@Model.Summary</p>
+        </div>
+    </div>
+    <div class="ratingSection d-inline-block mt-4">
+        @if (Model.Rating == 0 || Model.Rating == null)
+        {
+            <svg class="radial-progress" viewBox="0 0 80 80">
+                <circle class="incomplete" cx="40" cy="40" r="35"></circle>
+                <circle class="complete" cx="40" cy="40" r="35" style="stroke-dashoffset: 39.58;"></circle>
+                <text class="percentage" x="50%" y="57%" transform="matrix(0, 1, -1, 0, 80, 0)">No Rating</text>
+            </svg>
+
+        }
+        else
+        {
+            <svg class="radial-progress" data-percentage="@Model.Rating.ToString()" viewBox="0 0 80 80">
+                <circle class="incomplete" cx="40" cy="40" r="35"></circle>
+                <circle class="complete" cx="40" cy="40" r="35" style="stroke-dashoffset: 39.58;"></circle>
+                <text class="percentage" x="50%" y="57%" transform="matrix(0, 1, -1, 0, 80, 0)">@Model.Rating.ToString()%</text>
+                <text class="ratingtext" x="50%" y="70%" transform="matrix(0, 1, -1, 0, 80, 0)">rating</text>
+            </svg>
+        }
+
+    </div>
+    <div class="expansionSection mt-3">
+        @if (@Model.SimilarGames.Values.Length > 1)
+        {
+            <h2 class="font-weight-bold text-center bg-dark text-white py-1 pr-2 pl-2 mb-3">Expansions</h2>
+            <div class="ExpansionSwiper-container">
+                <div class="swiper-wrapper">
+
+                    @foreach (var expansion in Model.SimilarGames.Values)
+                    {
+                        <div class="swiper-slide">
+                            <a href="~/ShowGame/@expansion.Id"><img src="//images.igdb.com/igdb/image/upload/t_cover_big/@expansion.Cover.Value.ImageId@Html.Raw(".jpg")" alt="game picture" srcset="" class="screenshot rounded"></a>
+                        </div>
+                    }
+                </div>
+                <div class="mt-5"></div>
+                <!-- Add Pagination -->
+                <div class="ExpansionSwiper-pagination"></div>
+            </div>
+        }
+    </div>
+    <hr>
+    <div class="container">
+        <div class="ReviewSection mt-4 p-4">
+            <div>
+                <h4 class="text-center p-1 mb-0 mt-2">Join The Conversation</h4>
+                <h3 class="text-center mt-0 mb-0"><i class="fas fa-caret-down dropdown"></i></h3>
+                <div class="reviewContent">
+                    <div class="ReviewPostSection">
+                        <form action="~/addReview" method="post">
+                            <div class="form-group">
+                                @*<textarea asp-for="formReview.text" placeholder="place a review ..." class="form-control p-2" cols="30" rows="3"></textarea>
+                                <input type="hidden" asp-for="formReview.gameId" value="@Model.game.Id">
+                                <small class="d-block"><span asp-validation-for="formReview.text" class="text-danger font-weight-bold"></span></small>*@
+                                <div class="text-right mt-2"><button type="submit" class="btn btn-outline-danger">Post</button></div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <hr>
+                    <div class="ListOfReviews">
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
