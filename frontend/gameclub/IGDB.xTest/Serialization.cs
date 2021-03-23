@@ -117,13 +117,13 @@ namespace IGDB.xTest
       var time = DateTimeOffset.Now;
       var game = new Game()
       {
-        CreatedAt = time
+        Created_At = time
       };
 
       var serialized = JsonConvert.SerializeObject(game, IGDB.IGDBClient.DefaultJsonSerializerSettings);
       var deserialized = JsonConvert.DeserializeObject<Game>(serialized, IGDB.IGDBClient.DefaultJsonSerializerSettings);
 
-      Assert.Equal(time.ToUnixTimeSeconds(), deserialized.CreatedAt.Value.ToUnixTimeSeconds());
+      Assert.Equal(time.ToUnixTimeSeconds(), deserialized.Created_At.Value.ToUnixTimeSeconds());
     }
 
     [Fact]

@@ -21,11 +21,11 @@ namespace GameClubProject.Models
             var games = await _api.QueryAsync<Game>(IGDBClient.Endpoints.Games, query);
             try
             {
-                System.DateTime dateTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
+                System.DateTime dateTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);                
                 foreach (var game in games)
                 {
                     //Added the ability to convert from decimal to datetime format. 
-                    game.FirstReleaseDate = dateTime.AddSeconds(Convert.ToSingle(game.FirstReleaseDate));
+                    game.release_date = dateTime.AddSeconds(game.First_Release_Date);
                 }
                 return games;
             }
@@ -47,8 +47,7 @@ namespace GameClubProject.Models
 
             try
             {
-                var PopularGames = await _api.QueryAsync<PopularGame>(IGDBClient.Endpoints.Games, query);
-                //var PopularGames = await response.Content.ReadAsAsync<List<PopularGame>>();
+                var PopularGames = await _api.QueryAsync<PopularGame>(IGDBClient.Endpoints.Games, query);                
                 return PopularGames;
             }
             catch
@@ -86,10 +85,11 @@ namespace GameClubProject.Models
             try
             {
                 var games = await _api.QueryAsync<Game>(IGDBClient.Endpoints.Games, query);
-                System.DateTime dateTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
+                System.DateTime dateTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);                
                 foreach (var game in games)
                 {
-                    dateTime = dateTime.AddSeconds(game.Freshfirst_release_date);
+                    double f = game.First_Release_Date;
+                    dateTime = dateTime.AddSeconds(f);
                     game.release_date = dateTime;
                 }
                 return games;
@@ -106,16 +106,23 @@ namespace GameClubProject.Models
                 fields genres.name,cover.image_id,name,
                 rating,first_release_date,platforms.name,
                 storyline,summary,screenshots.image_id,videos.video_id,videos.name,
-                expansions.name,expansions.cover.image_id,involved_companies.company.name;
+                expansions.name,expansions.cover.image_id,involved_companies.company.name,similar_games.name,similar_games.cover.image_id;
                 where id={gameId};";
 
+            /*
+            fields genres.name,cover.image_id,name,
+                rating,first_release_date,platforms.name,
+                storyline,summary,screenshots.image_id,videos.video_id,videos.name,
+                expansions.name,expansions.cover.image_id,involved_companies.company.name;
+            where id = { gameId }; ";
+            */
             try
             {
                 var games = await _api.QueryAsync<Game>(IGDBClient.Endpoints.Games, query);
-                System.DateTime dateTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0);
+                System.DateTime dateTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
                 foreach (var game in games)
                 {
-                    dateTime = dateTime.AddSeconds(game.Freshfirst_release_date);
+                    dateTime = dateTime.AddSeconds(game.First_Release_Date);
                     game.release_date = dateTime;
 
                     if (game.Cover != null)
@@ -148,6 +155,10 @@ namespace GameClubProject.Models
             }
 
         }
+
+        
+
+
         public static string queryString(int MinRating, int MaxRating, string genre, string platform)
         {
             string query;

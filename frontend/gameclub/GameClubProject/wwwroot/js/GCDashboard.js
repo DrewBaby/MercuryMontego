@@ -38,7 +38,7 @@
                     success: function (response) {
 
                         for (let index = 0; index < response.length; index++) {
-                            $(".Genresfilters").append("<a href='/fetchGameBaseOnGenres/" + response[index].slug + "' class='btn btn-sm btn-outline-danger mr-3 mt-2'> " + response[index].name + " </a>")
+                            $(".Genresfilters").append("<a href='/GameOnGenres/" + response[index].slug + "' class='btn btn-sm btn-outline-danger mr-3 mt-2'> " + response[index].name + " </a>")
 
 
                         }
@@ -69,7 +69,7 @@
                     url: $(this).attr("href"),
                     success: function (response) {
                         for (let index = 0; index < response.length; index++) {
-                            $(".Platformsfilters").append("<a href='/fetchGameBaseOnPlatform/" + response[index] + "' class='btn btn-sm btn-outline-danger mr-3 mt-2'> " + response[index] + " </a>")
+                            $(".Platformsfilters").append("<a href='/GameOnPlatform/" + response[index] + "' class='btn btn-sm btn-outline-danger mr-3 mt-2'> " + response[index] + " </a>")
                         }
                     }
                 });
@@ -161,29 +161,29 @@
     var swiper = new Swiper('.swiper-container', {
 
         effect: 'coverflow',
-        initialSlide: 2, 
+        initialSlide: 2,
         grabCursor: true,
         centeredSlides: true,
         slidesPerView: 'auto',
 
         coverflowEffect: {
-        rotate: 50,
-        stretch: 40,
-        depth: 100,
-        modifier: 1,
-        slideShadows : false,
+            rotate: 50,
+            stretch: 40,
+            depth: 100,
+            modifier: 1,
+            slideShadows: false,
         },
         autoplay: {
             delay: 3000,
         },
         mousewheel: {
             invert: true,
-            forceToAxis:true,
-            sensitivity:200
+            forceToAxis: true,
+            sensitivity: 200
         },
         pagination: {
-        el: '.swiper-pagination',
-        clickable:true
+            el: '.swiper-pagination',
+            clickable: true
         },
     });
     swiper.on('autoplayStop', function () {
@@ -225,7 +225,7 @@
     });
 
 
-    // Video Swiper in gAME pROFILE
+    // Video Swiper in Game Profile
     var swiper = new Swiper('.VideoSwiper-container', {
 
         loop: true,

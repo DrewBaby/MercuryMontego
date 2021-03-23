@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace GameClubProject.Models
 {
-    public class GamePlatforms
+    public class GamePlatforms : VideoGamePlatform
     {
         [Key]        
         public int gamePlatform_id { get; set; }

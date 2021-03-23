@@ -6,7 +6,7 @@ namespace IGDB.Models
   {
     public ExternalCategory? Category { get; set; }
 
-    public DateTimeOffset? CreatedAt { get; set; }
+    public DateTimeOffset? Created_At { get; set; }
     public string Checksum { get; set; }
     public double[] Countries { get; set; }
     public IdentityOrValue<Game> Game { get; set; }
@@ -20,7 +20,7 @@ namespace IGDB.Models
 
     public string Uid { get; set; }
 
-    public DateTimeOffset? UpdatedAt { get; set; }
+    public DateTimeOffset? Updated_At { get; set; }
 
     public string Url { get; set; }
 

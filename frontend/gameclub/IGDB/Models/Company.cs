@@ -14,7 +14,7 @@ namespace IGDB.Models
     /// </summary>
     public int? Country { get; set; }
 
-    public DateTimeOffset? CreatedAt { get; set; }
+    public DateTimeOffset? Created_At { get; set; }
 
     public string Description { get; set; }
 
@@ -28,7 +28,7 @@ namespace IGDB.Models
     public string Slug { get; set; }
     public DateTimeOffset? StartDate { get; set; }
     public StartDateCategory? StartDateCategory { get; set; }
-    public DateTimeOffset? UpdatedAt { get; set; }
+    public DateTimeOffset? Updated_At { get; set; }
     public string Url { get; set; }
     public IdentitiesOrValues<CompanyWebsite> Websites { get; set; }
 

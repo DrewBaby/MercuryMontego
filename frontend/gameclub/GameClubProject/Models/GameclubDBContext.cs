@@ -37,6 +37,7 @@ namespace GameClubProject.Models
         public virtual DbSet<VideoGameSimilarTitle> VideoGameSimilarTitles { get; set; }
         public virtual DbSet<VideoGameTheme> VideoGameThemes { get; set; }
         public virtual DbSet<VideoGameUserContent> VideoGameUserContents { get; set; }
+        
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
