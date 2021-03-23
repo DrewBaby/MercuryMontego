@@ -1,66 +1,209 @@
 ﻿@model GamePageDetail
+
+@section Styles{
+    <link rel="stylesheet" href="~/css/GCGameDetail.css" />
+}
+
+@section Scripts{
+    <script src="~/js/GCGameDetail.js"></script>
+}
+
 <title>@Model.game.Name</title>
-<div class="text-left ml-5 mt-3">
-    <a href="~/Home" class="btn btn-dark ">Back</a>
+<div class="row flex-nowrap m-3">
+    <div class="col text-left p-0">
+        <a class="btn btn-dark" asp-area="" asp-controller="" asp-action=""><i class="bi bi-house-fill"></i> Add to favorites</a>
+    </div>
+    <div class="col text-right p-0">
+        <a class="btn btn-dark" asp-area="" asp-controller="" asp-action=""><i class="bi bi-house-fill"></i> Read/Write reviews!</a>
+    </div>
 </div>
-@if (Model.game.Videos.Values.Length > 0)
-{
 
 
-<div>
-    <div>
-        @foreach (var video in Model.game.Videos.Values)
-        {
-            <div>
-                <div class="videoHolder mt-5 ml-5 mr-5" preload="auto">
-                    <iframe id="vjs_video_2128_Youtube_api"
-                            class="vjs-tech" frameborder="0" allowfullscreen="1"
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            title="YouTube video player" width="640" height="360"
-                            src="https://www.youtube.com/embed/@video.VideoId?controls=0&amp;modestbranding=1&amp;rel=0&amp;showinfo=0&amp;loop=0&amp;fs=0&amp;hl=en&amp;iv_load_policy=3&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fwww.igdb.com&amp;widgetid=1"></iframe>
-                </div>
-            </div>
-            <div class="ml-2 mt-2 gameDescription">
-
-                <h6 class="mb-0">@Model.game.Name</h6>
-                <small class="mb-0 d-block releaseDate ml-1">@Model.game.release_date.ToString("MMMM dd, yyyy")</small>
-                @if (Model.game.Rating == 0)
+<div class="container game-detail">
+    <div class="row">
+        <div class="col col-3">
+            <h5 class="text-center">@Html.DisplayFor(item => Model.game.Name)</h5>
+        </div>
+        <div class="col col-9">
+            <p>
+                Release Date: @if (Model.game.FirstReleaseDate != null)
                 {
-                    <small class="text-muted d-block mt-3">Rating Unavailable</small>
+                    @Model.game.FirstReleaseDate.ToString().Substring(0, 10)
                 }
                 else
                 {
-                    <div class="stars-outer d-block mt-2">
-                        <div class="stars-inner " style="width: @Model.game.Rating.ToString()px;"></div>
-                    </div>
-                }
+                    <small class="text-muted d-block mt-3">Unavailable</small>
+                } |
 
-                @if (Model.game.Platforms == null)
+                @if (Model.game.Platforms != null)
                 {
-                    <small class="d-inline-block mb-0 text-muted">Platforms unavailable</small>
-                }
-                else
-                {
-                    @foreach (var platform in Model.game.Platforms.Values)
+                    foreach (var platform in Model.game.Platforms.Values)
                     {
                         <small class="d-inline-block mb-0 text-muted">@platform.Name /</small>
                     }
                 }
+                else
+                {
+                        <small class="text-muted d-block mt-3">Platforms Unavailable</small>
+                } |
+                <small>Score: @Model.game.Rating.Value.ToString().Substring(0, 2)</small>
+            </p>
+        </div>
+        <div class="col col-3">
+            <div id="cover-image-name">
+                @if (Model.game.Cover != null)
+                {
+                    <img src="@Html.DisplayFor(modelItem => Model.game.Cover.Value.Url)" class="card-img-top" alt="@Html.DisplayFor(modelItem => Model.game.Name)">
+                }
+                else
+                {
+                    <img src="~/images/big_unvailable-image.jpg" class="card-img-top" alt="@Html.DisplayFor(modelItem => Model.game.Name)">
+                }
+            </div>
+        </div>
+        <div class="col col-9">
+            <div id="game-summary">
+                <h5>Summary</h5>
+                <p>@Html.DisplayFor(item => Model.game.Summary)</p>
+            </div>
+        </div>
+    </div>
 
+    <div class="row my-3">
+        @if (Model.game.Screenshots != null)
+        {
+            <div class="swiper-container">
+                <div class="swiper-wrapper pb-5">
+                    @foreach (var item in Model.game.Screenshots.Values)
+                    {
+                        <div class="swiper-slide" id="swiper-slide">
+                            <img src="@Html.DisplayFor(modelItem => item.Url)" class="card-img-top" alt="@Html.DisplayFor(modelItem => item.Game.Value.Name)">
+                        </div>
+                    }
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        }
+        else
+        {
+            <div class="BigUnavailbleImageSection mt-4">
+                <img src="~/images/video-unavailable.jpg" alt="game picture" srcset="" class="rounded ">
             </div>
         }
     </div>
 
-    
+    <div class="row my-2">
+        <h5>Storyline</h5>
+        @if (Model.game.Storyline != null)
+        {
+            <p>@Model.game.Storyline</p>
+        }
+        else
+        {
+            <p>Oh no! No storyline available from IGDB.</p>
+        }
+    </div>
 
+    <div class="row my-2 text-center">
+        @if (Model.game.Videos != null)
+        {
+            @foreach (var video in Model.game.Videos.Values)
+            {
+                <div class="col-md-12 col-lg-6">
+                    <div class="videoHolder m-2" preload="auto">
+                        <iframe id="vjs_video_2128_Youtube_api"
+                                class="vjs-tech" frameborder="0" allowfullscreen="1"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                title="YouTube video player" width="426" height="240"
+                                src="https://www.youtube.com/embed/@video.VideoId?controls=0&amp;modestbranding=1&amp;rel=0&amp;showinfo=0&amp;loop=0&amp;fs=0&amp;hl=en&amp;iv_load_policy=3&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fwww.igdb.com&amp;widgetid=1"></iframe>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="BigUnavailbleImageSection">
+                <img src="~/images/video-unavailable.jpg" alt="game picture" srcset="" class="rounded ">
+            </div>
+        }
+    </div>
 
-    <!-- Add Pagination -->
-
+    <div class="row my-3">
+        <h5>Fan Art</h5>
+        @if (Model.game.Artworks != null)
+        {
+            <div class="swiper-container">
+                <div class="swiper-wrapper pb-5">
+                    @foreach (var item in Model.game.Artworks.Values)
+                    {
+                        <div class="swiper-slide" id="swiper-slide">
+                            <img src="@Html.DisplayFor(modelItem => item.Url)" class="card-img-top" alt="@Html.DisplayFor(modelItem => item.Game.Value.Name)">
+                        </div>
+                    }
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        }
+        else
+        {
+            <small class="text-muted d-block mt-3">Artwork Unavailable</small>
+        }
+    </div>
 </div>
+
+
+
+<!-- Andrew's code -->
+@*@if (Model.game.Videos != null)
+{
+    <div>
+        <div>
+            @foreach (var video in Model.game.Videos.Values)
+            {
+                <div>
+                    <div class="videoHolder mt-5 ml-5 mr-5" preload="auto">
+                        <iframe id="vjs_video_2128_Youtube_api"
+                                class="vjs-tech" frameborder="0" allowfullscreen="1"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                title="YouTube video player" width="640" height="360"
+                                src="https://www.youtube.com/embed/@video.VideoId?controls=0&amp;modestbranding=1&amp;rel=0&amp;showinfo=0&amp;loop=0&amp;fs=0&amp;hl=en&amp;iv_load_policy=3&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fwww.igdb.com&amp;widgetid=1"></iframe>
+                    </div>
+                </div>
+                <div class="ml-2 mt-2 gameDescription">
+
+                    <h6 class="mb-0">@Model.game.Name</h6>
+                    <small class="mb-0 d-block releaseDate ml-1">@Model.game.release_date.ToString("MMMM dd, yyyy")</small>
+                    @if (Model.game.Rating == 0)
+                    {
+                        <small class="text-muted d-block mt-3">Rating Unavailable</small>
+                    }
+                    else
+                    {
+                        <div class="stars-outer d-block mt-2">
+                            <div class="stars-inner " style="width: @Model.game.Rating.ToString()px;"></div>
+                        </div>
+                    }
+
+                    @if (Model.game.Platforms == null)
+                    {
+                        <small class="d-inline-block mb-0 text-muted">Platforms unavailable</small>
+                    }
+                    else
+                    {
+                        @foreach (var platform in Model.game.Platforms.Values)
+                        {
+                            <small class="d-inline-block mb-0 text-muted">@platform.Name /</small>
+                        }
+                    }
+
+                </div>
+            }
+        </div>
+    </div>
 }
 else
 {
     <div class="BigUnavailbleImageSection mt-4">
         <img src="~/images/video-unavailable.jpg" alt="game picture" srcset="" class="rounded ">
     </div>
-}
+}*@

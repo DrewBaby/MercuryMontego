@@ -158,9 +158,9 @@ namespace GameClubProject.Models
         {
             var _api = new IGDB.IGDBClient(IGDB_CLIENT_ID, IGDB_CLIENT_SECRET);
             var query = $@"
-                fields genres.name,cover.image_id,name,
-                rating,first_release_date,platforms.name,
-                storyline,summary,screenshots.image_id,videos.video_id,videos.name,
+                fields genres.name,cover.image_id,cover.url,name,
+                rating,first_release_date,platforms.name,artworks,artworks.url,
+                storyline,summary,screenshots.image_id,screenshots.url,videos.video_id,videos.name,
                 expansions.name,expansions.cover.image_id,involved_companies.company.name;
                 where id={gameId};";
 
