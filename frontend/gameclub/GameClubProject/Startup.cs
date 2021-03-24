@@ -72,6 +72,10 @@ namespace GameClubProject
             {
                 app.UseDeveloperExceptionPage();
             }   
+            else if (env.IsProduction())
+            {
+                app.UseDeveloperExceptionPage();
+            }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
