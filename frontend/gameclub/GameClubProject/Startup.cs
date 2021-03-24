@@ -56,8 +56,8 @@ namespace GameClubProject
             .AddGoogle(options =>
             {
                 IConfigurationSection googleAuthNSection =Configuration.GetSection("Authentication:Google");
-                options.ClientId = googleAuthNSection["ClientId"];
-                options.ClientSecret = googleAuthNSection["ClientSecret"];
+                options.ClientId = "220439306478-9126hhbrkg3phc3envdv4lo7qhjvf4kp.apps.googleusercontent.com";
+                options.ClientSecret = "qs_hmB7ZBvzZEkbMszCKsz8i";
             });
 
             services.AddMvc();
