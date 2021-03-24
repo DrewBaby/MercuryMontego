@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GameClubProject.Models;
+using IGDB.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GameClubProject.Data
 {
@@ -58,7 +60,27 @@ namespace GameClubProject.Data
         }
 
 
+        //public async Task<List<Game>> AddGameAssociation (Game game)
+        //{
+        //    var videoGameUserContent = new VideoGameUserContent();
+        //    var videoGameMain = new VideoGameMain();
+        //    videoGameMain.GameId = game.Id.ToString();
+        //    videoGameUserContent.UserId =
+        //    if (videoGameUserContent.UserId != null)
+        //    {
+        //        videoGameUserContent.GameId = game.Id.ToString();
+        //        videoGameUserContent.UserRating = 2;
+        //        videoGameUserContent.UserReview = "Space for rent";
+        //        videoGameMain.VideoGameUserContents.Add(videoGameUserContent);
+        //        if (_dbContext.VideoGameMains.All(g => g.GameId != videoGameMain.GameId))
+        //        {
+        //            _dbContext.VideoGameMains.Add(videoGameMain);
+        //            _dbContext.SaveChanges();
+        //        }
+        //    }
 
+
+        //}
 
     }
 

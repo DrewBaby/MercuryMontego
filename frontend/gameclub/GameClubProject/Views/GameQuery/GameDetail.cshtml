@@ -10,7 +10,16 @@
 <title>@Model.Name</title>
 <div class="row flex-nowrap m-3">
     <div class="col text-left p-0">
-        <a class="btn btn-dark" asp-area="" asp-controller="" asp-action=""><i class="bi bi-house-fill"></i> Add to favorites</a>
+        @*<a class="btn btn-dark" asp-area="" asp-controller="" asp-action=""><i class="bi bi-house-fill"></i> Add to favorites</a>*@         
+        <form method="post" asp-action="SaveGame" asp-controller="GameQuery">
+            <input type="hidden" asp-for="@Model.Id">
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-dark" />
+            </div>
+        </form>
+
+
+
     </div>
     <div class="col text-right p-0">
         <a class="btn btn-dark" asp-area="" asp-controller="" asp-action=""><i class="bi bi-house-fill"></i> Read/Write reviews!</a>
@@ -134,50 +143,33 @@
         }
     </div>
     <hr>
-    <div class="container">
-        <div class="ReviewSection mt-4 p-4">
-            <div>
-                <h4 class="text-center p-1 mb-0 mt-2">Join The Conversation</h4>
-                <h3 class="text-center mt-0 mb-0"><i class="fas fa-caret-down dropdown"></i></h3>
-                <div class="reviewContent">
-                    <div class="ReviewPostSection">
-                        <form action="~/addReview" method="post">
-                            <div class="form-group">
-                                @*<textarea asp-for="formReview.text" placeholder="place a review ..." class="form-control p-2" cols="30" rows="3"></textarea>
-                                    <input type="hidden" asp-for="formReview.gameId" value="@Model.game.Id">
-                                    <small class="d-block"><span asp-validation-for="formReview.text" class="text-danger font-weight-bold"></span></small>*@
-                                <div class="text-right mt-2"><button type="submit" class="btn btn-outline-danger">Post</button></div>
-                            </div>
-                        </form>
-                    </div>
+    @{ await Html.RenderPartialAsync("_GameDetailReview", new ReviewModel() { GameID = Model.Id.ToString(), UserID = User.Claims.FirstOrDefault().Value.ToString() });}
+
+    <hr>
+    
+    <div class="row my-3">
+        <h5>Fan Art</h5>
+        @if (Model.Artworks != null)
+        {
+            <div class="swiper-container">
+                <div class="swiper-wrapper pb-5">
+                    @foreach (var item in Model.Artworks.Values)
+                    {
+                        <div class="swiper-slide" id="swiper-slide" style="max-height: 250px;">
+                            <img style="max-height:inherit;" src="//images.igdb.com/igdb/image/upload/t_cover_big/@item.ImageId@Html.Raw(".jpg")" class="card-img-top" alt="@Html.DisplayFor(modelItem => item.Game.Value.Name)">
+                        </div>
+                    }
                 </div>
+                <div class="swiper-pagination"></div>
             </div>
-        </div>
-        <hr>
-
-        <div class="row my-3">
-            <h5>Fan Art</h5>
-            @if (Model.Artworks != null)
-            {
-                <div class="swiper-container">
-                    <div class="swiper-wrapper pb-5">
-                        @foreach (var item in Model.Artworks.Values)
-                        {
-                            <div class="swiper-slide" id="swiper-slide" style="max-height: 250px;">
-                                <img style="max-height:inherit;" src="//images.igdb.com/igdb/image/upload/t_cover_big/@item.ImageId@Html.Raw(".jpg")" class="card-img-top" alt="@Html.DisplayFor(modelItem => item.Game.Value.Name)">
-                            </div>
-                        }
-                    </div>
-                    <div class="swiper-pagination"></div>
-                </div>
-            }
-            else
-            {
-                <small class="text-muted d-block mt-3">Artwork Unavailable</small>
-            }
-        </div>
-
+        }
+        else
+        {
+            <small class="text-muted d-block mt-3">Artwork Unavailable</small>
+        }
     </div>
+
+</div>
 </div>
 
 

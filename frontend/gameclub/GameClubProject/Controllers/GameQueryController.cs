@@ -67,17 +67,7 @@ namespace GameClubProject.Controllers
         {
             return View();
         }
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-        // 
-        // GET: /HelloWorld/Welcome/ 
 
-        //public string Welcome()
-        //{
-        //    return "This is the Welcome action method...";
-        //}
         [AllowAnonymous]
         public string Welcome(string name, int numTimes = 1)
         {
@@ -162,86 +152,64 @@ namespace GameClubProject.Controllers
             var gamePageDetail = new GamePageDetail();
             Game game = await GameDBLogic.ShowOneGame(gameId);
             //SaveGame(game);
-            //gamePageDetail.game = await GameDBLogic.ShowOneGame(gameId);
-
-
-
+            //gamePageDetail.game = await GameDBLogic.ShowOneGame(gameId);            
+            ViewBag.gameID = gameId.ToString();
 
             return View("GameDetail", game);
 
         }
 
-        public void SaveGame(Gamer game)
+
+
+        [HttpPost("SaveGame")]
+        public IActionResult SaveGame(Game game)
         {
-             //= (int)HttpContext.Session.GetInt32("user_id");
-
-            if (game.expansions != null)
+            var videoGameUserContent = new VideoGameUserContent();
+            var videoGameMain = new VideoGameMain();
+            videoGameMain.GameId= game.Id.ToString();
+            videoGameUserContent.UserId = User.Claims.FirstOrDefault().Value.ToString();            
+            if (videoGameUserContent.UserId != null)
             {
-                foreach (var expansion in game.expansions)
+                videoGameUserContent.GameId = game.Id.ToString();
+                videoGameUserContent.UserRating = 2;
+                videoGameUserContent.UserReview = "Space for rent";
+                videoGameMain.VideoGameUserContents.Add(videoGameUserContent);
+                if (_dbContext.VideoGameMains.All(g => g.GameId != videoGameMain.GameId))
                 {
-                    expansion.cover.expansion_id = expansion.id;
-                    expansion.cover.gameId = expansion.id;
+                    _dbContext.VideoGameMains.Add(videoGameMain);
+                    _dbContext.SaveChanges();
                 }
+            }          
 
-            }
+            return RedirectToAction("Home");
 
-            /*
-            _dbContext.VideoGameMains.Add(game);
-
-            if (game.genres != null)
-            {
-                foreach (var genre in game.genres)
-                {
-                    if (_dbContext.VideoGameGenres.All(g => g.genre_id != genre.Id))
-                    {
-                        _dbContext.VideoGameGenres.Add(genre);
-                    }
-                    var gameGenre = new GameGenres();
-                    gameGenre.gameId = game.gameId;
-                    gameGenre.genre_id = genre.genre_id;
-                    _dbContext.GameGenres.Add(gameGenre);
-
-                }
-            }
-*/
-
-/*            if (game.involved_companies != null)
-            {
-                foreach (var involComp in game.involved_companies)
-                {
-                    if (_dbContext.GameCompanies.All(comp => comp.company_id != involComp.company.company_id))
-                    {
-                        _dbContext.GameCompanies.Add(involComp.company);
-                    }
-                    var gameCompany = new GameCompanies();
-                    gameCompany.company_id = involComp.company.company_id;
-                    gameCompany.gameId = game.gameId;
-                    _dbContext.GameCompanies.Add(gameCompany);
-
-                }
-            }
-
- */
-            if (game.platforms != null)
-            {
-                foreach (var platform in game.platforms)
-                {
-                    //if (_dbContext.VideoGamePlatforms.All(p => p.PKey != platform.platform_id))
-                    //{
-                    //    _dbContext.VideoGamePlatforms.Add(platform);
-                    //}
-                    //var gamePlatform = new GamePlatforms();
-                    //gamePlatform.gameId = game.gameId;
-                    //gamePlatform.platform_id = platform.platform_id;
-                    //_dbContext.VideoGamePlatforms.Add(gamePlatform);
-
-
-                }
-            }
-
-            _dbContext.SaveChanges();
 
         }
+
+        [HttpPost("SaveReview")]
+        public IActionResult SaveReview(ReviewModel game)
+        {
+            var userid = User.Claims.FirstOrDefault().Value.ToString();
+            // && a.UserId == User.Claims.FirstOrDefault().Value.ToString())
+            if (_dbContext.VideoGameUserContents.All(a => a.GameId == game.GameID))
+            {
+                
+                var reviewUpdate = _dbContext.VideoGameUserContents.First(a => a.GameId == game.GameID && a.UserId == userid);
+                reviewUpdate.UserReview = game.UserReview;
+                _dbContext.SaveChanges();
+            }
+            else
+            {
+
+            }
+
+            return RedirectToAction("Home");
+
+
+        }
+
+
+
 
 
         [HttpGet("fetchGenres")]
@@ -253,11 +221,9 @@ namespace GameClubProject.Controllers
             return Json(filters.genres);
         }
 
-
         [HttpGet("advance_search")]
         public async Task<IActionResult> AdvanceSearch()
         {
-
             if (ModelState.IsValid)
             {
                 //TempData["gameName"] = gameName;
@@ -275,7 +241,6 @@ namespace GameClubProject.Controllers
             return View("Dashboard", DashboardBundle);
         }
 
-
         [HttpGet("fetchPlatforms")]
         public IActionResult FetchPlatforms()
         {
@@ -285,24 +250,25 @@ namespace GameClubProject.Controllers
             return Json(filters.platforms);
         }
 
-
         [HttpPost("GamesOnRating")]
-        public IActionResult GamesOnRating(RatingForm rating_form)
+        public async Task<IActionResult> GamesOnRating(RatingForm rating_form)
         {
-
             HttpContext.Session.SetInt32("MaxRating", (int)rating_form.MaxRating);
             HttpContext.Session.SetInt32("MinRating", (int)rating_form.MinRating);
-
-            Console.WriteLine(rating_form.MaxRating + "," + rating_form.MinRating);
-
-            return RedirectToAction("Home");
+            var DashboardBundle = await FetchGames();
+            ViewBag.filters = new Dictionary<string, object> {
+                {"MinRating",(int)HttpContext.Session.GetInt32("MinRating")},
+                {"MaxRating",(int)HttpContext.Session.GetInt32("MaxRating")},
+                {"Platform",HttpContext.Session.GetString("Platform")},
+                {"Genre",HttpContext.Session.GetString("Genre")}
+            };
+            ViewBag.userName = HttpContext.Session.GetString("userName");
+            return View("Dashboard", DashboardBundle);            
         }
 
         [HttpGet("GameOnGenres/{genre}")]
         public async Task<IActionResult> GameOnGenres(string genre)
         {
-
-
             HttpContext.Session.SetString("Genre", genre);
             var DashboardBundle = await FetchGames();
             ViewBag.filters = new Dictionary<string, object> {
@@ -310,7 +276,6 @@ namespace GameClubProject.Controllers
                 {"MaxRating",(int)HttpContext.Session.GetInt32("MaxRating")},
                 {"Platform",HttpContext.Session.GetString("Platform")},
                 {"Genre",HttpContext.Session.GetString("Genre")}
-
             };
             ViewBag.userName = HttpContext.Session.GetString("userName");
             return View("Dashboard", DashboardBundle);
@@ -320,8 +285,6 @@ namespace GameClubProject.Controllers
         [HttpGet("GameOnPlatform/{platform}")]
         public async Task<IActionResult> GameOnPlatform(string platform)
         {
-
-
             HttpContext.Session.SetString("Platform", platform);
             var DashboardBundle = await FetchGames();
             ViewBag.filters = new Dictionary<string, object> {
@@ -329,12 +292,9 @@ namespace GameClubProject.Controllers
                 {"MaxRating",(int)HttpContext.Session.GetInt32("MaxRating")},
                 {"Platform",HttpContext.Session.GetString("Platform")},
                 {"Genre",HttpContext.Session.GetString("Genre")}
-
             };
             ViewBag.userName = HttpContext.Session.GetString("userName");
             return View("Dashboard", DashboardBundle);
-
         }
-
-    }
+    }     
 }

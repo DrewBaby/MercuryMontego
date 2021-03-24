@@ -1,0 +1,42 @@
+﻿@model IEnumerable<GameClubProject.Models.VideoGameUserContent>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserRating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UserReview)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {            
+            @if (item.GameId != null)
+            {<tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserRating)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserReview)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.User.UserName)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.PKey">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.PKey">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.PKey">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

@@ -42,7 +42,7 @@ namespace GameClubProject
 
             
             //Automatically Perform Database Migration
-            //services.BuildServiceProvider().GetService<GameclubDBContext>().Database.Migrate();           
+            services.BuildServiceProvider().GetService<GameclubDBContext>().Database.Migrate();           
 
             services.AddAuthentication(options =>
             {
@@ -51,7 +51,7 @@ namespace GameClubProject
             .AddCookie(options =>
             {
             options.LoginPath = "/google-login"; // Must be lowercase
-            options.ExpireTimeSpan = TimeSpan.FromMinutes(2);  //Set maximum timeout for Google sign in page until you have to reauth.             
+            options.ExpireTimeSpan = TimeSpan.FromMinutes(30);  //Set maximum timeout for Google sign in page until you have to reauth.             
             })
             .AddGoogle(options =>
             {
