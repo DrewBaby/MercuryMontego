@@ -146,15 +146,14 @@ namespace GameClubProject.Controllers
         //}
 
         [AllowAnonymous]
-        public IActionResult GoogleLogout()
+        public async Task<IActionResult> GoogleLogout()
         {
-            var callbackUrl = Url.Action("SignedOut", "LogonProfile", values: null, protocol: Request.Scheme);
-            return SignOut(new AuthenticationProperties { RedirectUri = callbackUrl },
-                CookieAuthenticationDefaults.AuthenticationScheme);
-
-            //var properties = new AuthenticationProperties { RedirectUri = Url.Action("SignedOut") };
-            //return Challenge(properties, GoogleDefaults.AuthenticationScheme);
-
+            if (User?.Identity.IsAuthenticated == true)
+            {
+                // delete local authentication cookie
+                await HttpContext.SignOutAsync();
+            }
+            return RedirectToAction("About", "GameQuery");
         }
 
         public async Task EndSession()

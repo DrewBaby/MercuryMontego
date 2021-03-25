@@ -287,15 +287,19 @@ namespace GameClubProject.Controllers
 
 
         [HttpPost("GamesOnRating")]
-        public IActionResult GamesOnRating(RatingForm rating_form)
+        public async Task<IActionResult> GamesOnRating(RatingForm rating_form)
         {
-
             HttpContext.Session.SetInt32("MaxRating", (int)rating_form.MaxRating);
             HttpContext.Session.SetInt32("MinRating", (int)rating_form.MinRating);
-
-            Console.WriteLine(rating_form.MaxRating + "," + rating_form.MinRating);
-
-            return RedirectToAction("Home");
+            var DashboardBundle = await FetchGames();
+            ViewBag.filters = new Dictionary<string, object> {
+                {"MinRating",(int)HttpContext.Session.GetInt32("MinRating")},
+                {"MaxRating",(int)HttpContext.Session.GetInt32("MaxRating")},
+                {"Platform",HttpContext.Session.GetString("Platform")},
+                {"Genre",HttpContext.Session.GetString("Genre")}
+            };
+            ViewBag.userName = HttpContext.Session.GetString("userName");
+            return View("Dashboard", DashboardBundle);
         }
 
         [HttpGet("GameOnGenres/{genre}")]
