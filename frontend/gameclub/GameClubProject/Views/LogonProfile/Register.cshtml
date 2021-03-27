@@ -1,0 +1,115 @@
+﻿@model GameClubProject.Models.UserAccount
+
+@{
+    ViewData["Title"] = "GameClub Registration";
+}
+
+<div class="container">
+    <h3 class="display-4">User Account Registration</h3>
+    <hr />
+    @if (ViewBag.IsSuccess == true)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Congratulations</strong> You have created a User Profile. <br />
+            Click <a asp-controller="GameQuery" asp-action="GameDetail" asp-route-id="@ViewBag.UserId">here</a> to view the details
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post" asp-action="Register" asp-controller="LogonProfile">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                        <label asp-for="UserId" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <input asp-for="UserId" class="form-control" />
+                            <span asp-validation-for="UserId" class="text-danger"></span>
+                        </div>
+                    </div>
+                <div class="form-group">
+                    <label asp-for="UserName" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="UserName" class="form-control" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MembershipStatusId" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <select asp-for="MembershipStatusId" class="form-control" asp-items="@(new SelectList (ViewBag.MembershipStatusId,"MembershipStatusId","Description"))"></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="FirstName" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="FirstName" class="form-control" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="LastName" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="LastName" class="form-control" />
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AddressStreet" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="AddressStreet" class="form-control" />
+                        <span asp-validation-for="AddressStreet" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AddressStreet2" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="AddressStreet2" class="form-control" />
+                        <span asp-validation-for="AddressStreet2" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AddressCity" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="AddressCity" class="form-control" />
+                        <span asp-validation-for="AddressCity" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AddressState" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="AddressState" class="form-control" />
+                        <span asp-validation-for="AddressState" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label asp-for="AddressZipCode" class="col-md-2 control-label"></label>
+                    <div class="col-md-10">
+                        <input asp-for="AddressZipCode" class="form-control" />
+                        <span asp-validation-for="AddressZipCode" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a class="nav-link text-truncate text-dark" asp-area="" asp-controller="GameQuery" asp-action="Home"></i>Back to Dashboard</a>
+    </div>
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+</div>

@@ -1,0 +1,1 @@
+﻿CREATE LOGIN gamedbadm WITH password='!#ASDF!aCCt';

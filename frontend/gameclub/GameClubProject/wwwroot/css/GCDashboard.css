@@ -1,0 +1,154 @@
+﻿﻿ /* 
+Site wide changes 
+Andrew Lawson - Merge Branches and incorporate Travis Changes into main Development Branch   - 03/22/2021
+*/
+
+body {
+    background-color: inherit;
+}
+
+.swiper-container {
+    width: 100%;
+    height: 500px !important;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.swiper-slide {
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    height: 300px;
+}
+
+.swiper-pagination, .ExpansionSwiper-pagination {
+    text-align: center;
+}
+
+.swiper-pagination-bullet {
+    text-align: center;
+    line-height: 20px;
+    margin-right: 5px;
+    font-size: 12px;
+    color: #000;
+    opacity: 1;
+    background: rgba(255, 46, 46, 0.2);
+}
+
+.swiper-pagination-bullet-active {
+    color: #fff;
+    background: #e01001;
+}
+
+.popularGameText {
+    font-family: 'Monoton', cursive;
+    text-transform: uppercase;
+}
+
+hr {
+    border-top: 1px solid rgb(75, 75, 75);
+}
+
+.gamePic {
+    height: 120px !important;
+    width: 100px !important;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.releaseDate {
+    color: rgb(255, 255, 255) !important;
+}
+
+.stars-outer {
+    position: relative;
+    display: inline-block;
+}
+
+.stars-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+}
+
+.stars-outer::before {
+    content: "\f005\f005\f005\f005\f005";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    font-size: 15px;
+    color: #ccc;
+}
+
+.stars-inner::before {
+    content: "\f005\f005\f005\f005\f005";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: #f8ce0b;
+    font-size: 15px;
+}
+
+.filters {
+    height: auto;
+}
+
+.filter-tag small {
+    font-family: 'Roboto Condensed', sans-serif;
+    border-radius: 5px;
+}
+
+.filter-tag a i:hover {
+    font-size: 15px;
+    transition-duration: 0.5s;
+    color: orange !important;
+}
+
+/*START Genre slider modifications*/
+#swiper-container-genres {
+    width: 100%;
+    height: 350px !important;
+    padding-top: 0px !important;
+}
+
+#swiper-slide-genres {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    width: 10rem;
+    /* Center slide text vertically */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.description-text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 16px;
+}
+
+@media screen and (max-width: 770px) {
+    .description-text {
+        font-size: 12px;
+    }
+}
+/*END Genre slider modifications*/
+
+
+@media screen and (max-width: 420px) {
+    .popularGameText {
+        margin-top: 130px !important;
+    }
+}

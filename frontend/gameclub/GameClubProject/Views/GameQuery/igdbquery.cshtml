@@ -1,0 +1,155 @@
+﻿@model IEnumerable<IGDB.Models.Game>
+
+@{
+    ViewData["Title"] = "igdbquery";
+}
+
+<h1>igdbquery</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.AggregatedRating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AggregatedRatingCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Checksum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Created_At)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First_Release_Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Follows)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hypes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RatingCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Slug)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Storyline)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Summary)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalRating)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalRatingCount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Updated_At)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VersionTitle)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AggregatedRating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AggregatedRatingCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Checksum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created_At)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.First_Release_Date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Follows)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hypes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RatingCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Slug)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Storyline)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Summary)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalRating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TotalRatingCount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Updated_At)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Url)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VersionTitle)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

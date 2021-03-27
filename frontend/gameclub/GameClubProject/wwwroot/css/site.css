@@ -1,71 +1,143 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
-
-a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
-}
-
-/* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
-}
-
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  font-size: 14px;
-}
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.border-top {
-  border-top: 1px solid #e5e5e5;
-}
-.border-bottom {
-  border-bottom: 1px solid #e5e5e5;
-}
-
-.box-shadow {
-  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
-}
-
-button.accept-policy {
-  font-size: 1rem;
-  line-height: inherit;
-}
-
-/* Sticky footer styles
--------------------------------------------------- */
-html {
-  position: relative;
-  min-height: 100%;
-}
+﻿/* 
+Site wide changes 
+Andrew Lawson - Merge Branches and incorporate Travis Changes into main Development Branch   - 03/22/2021
+*/
 
 body {
-  /* Margin bottom by footer height */
-  margin-bottom: 60px;
+    width: 100%;
 }
-.footer {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  white-space: nowrap;
-  line-height: 60px; /* Vertically center the text there */
+
+#content-area {
+    background-color: #3C403D !important;
+    color: white !important;
 }
+
+
+/* Navigation changes */
+.site-header {
+    font-family: 'Roboto Condensed', sans-serif;
+}
+    .site-header a:hover {
+        text-decoration: none;
+    }
+
+.searchDiv input {
+    display: inline-block;
+}
+
+nav i {
+    font-size: 20px;
+}
+
+.filterBox {
+    background-color: #000;
+    padding: 15px;
+    border-radius: 5px;
+    border-bottom: 1px solid rgb(88, 88, 88);
+}
+
+    .filterBox .filtersTitle a {
+        margin-right: 35px;
+        color: white;
+        padding: 10px;
+        font-family: 'Roboto Condensed', sans-serif;
+        font-size: 17px;
+    }
+
+        .filterBox .filtersTitle a:hover {
+            text-decoration: none;
+            background-color: red;
+            padding: 12px;
+            transition-duration: 0.5s;
+            border-radius: 10px;
+        }
+
+/* Responsive changes */
+@media screen and (min-width: 1500px) {
+
+    /*body {
+        max-width: 80% !important;
+        margin-left: 10% !important;
+    }*/
+}
+
+@media screen and (max-width: 892px) {
+
+    .site-header .row .userName {
+        display: none !important;
+    }
+
+    .site-header .ProfileBtn i {
+        font-size: 30px !important;
+    }
+
+    .site-header .ProfileBtn {
+        text-align: center !important;
+    }
+}
+
+@media screen and (max-width: 755px) {
+
+    .site-header .row .fa-star-half-alt {
+        display: none !important;
+    }
+
+    .site-header .ProfileBtn {
+        max-width: 10% !important;
+    }
+
+    .site-header .row a:last-child {
+        flex: none;
+        max-width: 10% !important;
+        margin-left: 10px !important;
+    }
+}
+
+@media screen and (max-width: 420px) {
+
+    .site-header .row a:first-child {
+        flex: none;
+        max-width: 40% !important;
+        background-color: rgb(24, 24, 24) !important;
+    }
+
+    .site-header .row form {
+        flex: none;
+        max-width: 100% !important;
+        margin-left: 0px !important;
+        position: absolute;
+        top: 100px;
+    }
+
+        .site-header .row form input {
+            flex: none;
+            margin-left: 0px !important;
+            max-width: 65% !important;
+        }
+
+    .site-header .row .ProfileBtn {
+        flex: none;
+        max-width: 30% !important;
+        text-align: end !important;
+    }
+
+    .site-header .row a:last-child {
+        flex: none;
+        max-width: 20% !important;
+        margin-left: 20px !important;
+    }
+}
+
+@media (max-width: 380px) {
+    #sidebar {
+        display: none;
+    }
+}
+
+
+@media (min-width: 380px) {
+    .hideMe {
+        display: none;
+    }
+}
+

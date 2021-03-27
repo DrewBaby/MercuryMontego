@@ -1,0 +1,188 @@
+﻿@model Game
+@section Styles{
+    <link rel="stylesheet" href="~/css/GCGameDetail.css" asp-append-version="true" />
+}
+
+@section Scripts{
+    <script src="~/js/GCGameDetail.js" asp-append-version="true"></script>
+}
+
+<title>@Model.Name</title>
+<div class="row flex-nowrap m-3">
+    <div class="col text-left p-0">
+        <a class="btn btn-dark" asp-area="" asp-controller="" asp-action=""><i class="bi bi-house-fill"></i> Add to favorites</a>
+    </div>
+    <div class="col text-right p-0">
+        <a class="btn btn-dark" asp-area="" asp-controller="" asp-action=""><i class="bi bi-house-fill"></i> Read/Write reviews!</a>
+    </div>
+</div>
+
+<div class="ml-5 mr-5 GameBio">
+    <div class="container game-detail">
+        <div class="row">
+            <div class="col col-3">
+                <h5 class="text-center">@Html.DisplayFor(item => Model.Name)</h5>
+            </div>
+            <div class="col col-9">
+                <p>
+                    Release Date: @if (Model.release_date != null)
+                    {
+                        @Model.release_date.ToString("MMMM dd, yyyy")
+                    }
+                    else
+                    {
+                        <small class="text-muted mt-3">Unavailable</small>
+                    } |
+                    @if (Model.Platforms != null)
+                    {
+                        foreach (var platform in Model.Platforms.Values)
+                        {
+                            <small class="d-inline-block mb-0 text-muted">@platform.Name /</small>
+                        }
+                    }
+                    else
+                    {
+                        <small class="text-muted mt-3">Platforms Unavailable</small>
+                    } |
+                    @if (Model.Rating != null)
+                    {
+                        <small>Score: @Model.Rating.Value.ToString().Substring(0, 2)</small>
+                    }
+                    else
+                    {
+                        <small class="text-muted mt-3">Rating Unavailable</small>
+                    }
+                </p>
+            </div>
+            <div class="col col-3">
+                <div id="cover-image-name">
+                    @if (Model.Cover != null)
+                    {
+                        <img src="//images.igdb.com/igdb/image/upload/t_cover_big/@Model.Cover.Value.ImageId@Html.Raw(".jpg")" class="card-img-top" alt="@Model.Name)">
+                    }
+                    else
+                    {
+                        <img src="~/images/big_unvailable-image.jpg" class="card-img-top" alt="@Model.Name)">
+                    }
+                </div>
+            </div>
+            <div class="col col-9">
+                <div id="game-summary">
+                    <h5>Summary</h5>
+                    <p>@Html.DisplayFor(item => Model.Summary)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-3">
+        @if (Model.Screenshots != null)
+        {
+            <div class="swiper-container">
+                <div class="swiper-wrapper pb-5">
+                    @foreach (var items in Model.Screenshots.Values)
+                    {
+                        <div class="swiper-slide" id="swiper-slide">
+                            <img src="//images.igdb.com/igdb/image/upload/t_cover_big/@items.ImageId@Html.Raw(".jpg")" class="card-img-top" alt="@Html.DisplayFor(modelItem => items.Game.Value.Name)">
+                        </div>
+                    }
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        }
+        else
+        {
+            <div class="BigUnavailbleImageSection mt-4">
+                <img src="~/images/video-unavailable.jpg" alt="game picture" srcset="" class="rounded ">
+            </div>
+        }
+    </div>
+
+    <div class="row my-2">
+        <h5>Storyline</h5>
+        @if (Model.Storyline != null)
+        {
+            <p>@Model.Storyline</p>
+        }
+        else
+        {
+            <p>Oh no! No storyline available from IGDB.</p>
+        }
+    </div>
+
+    <div class="row my-2 text-center">
+        @if (Model.Videos != null)
+        {
+            @foreach (var video in Model.Videos.Values)
+            {
+                <div class="col-md-12 col-lg-6">
+                    <div class="videoHolder m-2" preload="auto">
+                        <iframe id="vjs_video_2128_Youtube_api"
+                                class="vjs-tech" frameborder="0" allowfullscreen="1"
+                                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                title="YouTube video player" width="426" height="240"
+                                src="https://www.youtube.com/embed/@video.VideoId?controls=0&amp;modestbranding=1&amp;rel=0&amp;showinfo=0&amp;loop=0&amp;fs=0&amp;hl=en&amp;iv_load_policy=3&amp;enablejsapi=1&amp;origin=https%3A%2F%2Fwww.igdb.com&amp;widgetid=1"></iframe>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="BigUnavailbleImageSection">
+                <img src="~/images/video-unavailable.jpg" alt="game picture" srcset="" class="rounded ">
+            </div>
+        }
+    </div>
+    <hr>
+    <div class="container">
+        <div class="ReviewSection mt-4 p-4">
+            <div>
+                <h4 class="text-center p-1 mb-0 mt-2">Join The Conversation</h4>
+                <h3 class="text-center mt-0 mb-0"><i class="fas fa-caret-down dropdown"></i></h3>
+                <div class="reviewContent">
+                    <div class="ReviewPostSection">
+                        <form action="~/addReview" method="post">
+                            <div class="form-group">
+                                @*<textarea asp-for="formReview.text" placeholder="place a review ..." class="form-control p-2" cols="30" rows="3"></textarea>
+                                    <input type="hidden" asp-for="formReview.gameId" value="@Model.game.Id">
+                                    <small class="d-block"><span asp-validation-for="formReview.text" class="text-danger font-weight-bold"></span></small>*@
+                                <div class="text-right mt-2"><button type="submit" class="btn btn-outline-danger">Post</button></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr>
+
+        <div class="row my-3">
+            <h5>Fan Art</h5>
+            @if (Model.Artworks != null)
+            {
+                <div class="swiper-container">
+                    <div class="swiper-wrapper pb-5">
+                        @foreach (var item in Model.Artworks.Values)
+                        {
+                            <div class="swiper-slide" id="swiper-slide" style="max-height: 250px;">
+                                <img style="max-height:inherit;" src="//images.igdb.com/igdb/image/upload/t_cover_big/@item.ImageId@Html.Raw(".jpg")" class="card-img-top" alt="@Html.DisplayFor(modelItem => item.Game.Value.Name)">
+                            </div>
+                        }
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
+            }
+            else
+            {
+                <small class="text-muted d-block mt-3">Artwork Unavailable</small>
+            }
+        </div>
+
+    </div>
+</div>
+
+
+
+
+
+
+
